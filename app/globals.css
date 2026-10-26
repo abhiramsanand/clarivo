@@ -1,5 +1,10 @@
 @tailwind base; @tailwind components; @tailwind utilities;
 html { background: #07090c; color: #e9eef2; scroll-behavior: auto; scroll-padding-top: 5rem; }
+html { scrollbar-color: #c9b48a #111419; scrollbar-width: thin; }
+html::-webkit-scrollbar { width: 10px; }
+html::-webkit-scrollbar-track { background: #111419; }
+html::-webkit-scrollbar-thumb { border: 3px solid #111419; border-radius: 999px; background: #8f8064; }
+html::-webkit-scrollbar-thumb:hover { background: #d6b98a; }
 body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 ::selection { background: #d6b98a; color: #07090c; }
 :focus-visible { outline: 2px solid #d6b98a; outline-offset: 3px; }

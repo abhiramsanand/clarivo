@@ -73,23 +73,6 @@ export default function Motion({ children }: { children: React.ReactNode }) {
         select<HTMLElement>("[data-reveal]").forEach((item) => gsap.from(item, { opacity: 0, y: 28, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: item, start: "top 88%" } }));
       });
 
-      mm.add("(prefers-reduced-motion: no-preference) and (min-width: 768px)", () => {
-        const steps = select<HTMLElement>("[data-step]");
-        if (steps.length !== 3) return;
-        gsap.set(select("[data-film]"), { opacity: 0 });
-        gsap.set(select("[data-how-frost]"), { opacity: 0 });
-        gsap.set(steps, { opacity: 0.28 });
-        gsap.set(steps[0], { opacity: 1 });
-        const story = gsap.timeline({ scrollTrigger: { trigger: select("[data-how]"), start: "top top", end: "+=190%", scrub: 0.7, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
-        story.to(steps[0], { opacity: 0.28, duration: 0.5 }, 0.5)
-          .to(steps[1], { opacity: 1, duration: 0.5 }, 0.5)
-          .to(select("[data-film]"), { opacity: 1, duration: 0.6, ease: "power2.out" }, 0.5)
-          .to(steps[1], { opacity: 0.28, duration: 0.5 }, 1.35)
-          .to(steps[2], { opacity: 1, duration: 0.5 }, 1.35)
-          .to(select("[data-how-frost]"), { opacity: 1, duration: 0.8, ease: "power2.inOut" }, 1.35)
-          .to(select("[data-how-bar]"), { scaleY: 1, duration: 1.85, ease: "none" }, 0);
-      });
-
       mm.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
         const cleanups: Array<() => void> = [];
         select<HTMLElement>("[data-magnetic]").forEach((item) => {
