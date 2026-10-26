@@ -1,6 +1,6 @@
 @tailwind base; @tailwind components; @tailwind utilities;
-html { background: #07090c; color: #e9eef2; scroll-behavior: auto; }
-body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { background: #07090c; color: #e9eef2; scroll-behavior: auto; scroll-padding-top: 5rem; }
+body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 ::selection { background: #d6b98a; color: #07090c; }
 :focus-visible { outline: 2px solid #d6b98a; outline-offset: 3px; }
 .grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
@@ -8,5 +8,7 @@ body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-seri
 .display { font-family: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; font-weight: 400; letter-spacing: -.025em; line-height: .95; }
 .frost { backdrop-filter: blur(26px) saturate(1.1); -webkit-backdrop-filter: blur(26px) saturate(1.1); background: linear-gradient(135deg, rgba(233,238,242,.55), rgba(169,207,230,.35)); }
 @keyframes marquee { to { transform: translateX(-50%); } }
-.marquee { animation: marquee 38s linear infinite; }
-@media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
+.marquee-track { animation: marquee 42s linear infinite; }
+.mobile-nav summary::-webkit-details-marker { display: none; }
+@media (hover: hover) { .marquee-track:hover { animation-play-state: paused; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
