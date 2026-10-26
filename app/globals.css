@@ -1,0 +1,12 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+html { background: #07090c; color: #e9eef2; scroll-behavior: auto; }
+body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::selection { background: #d6b98a; color: #07090c; }
+:focus-visible { outline: 2px solid #d6b98a; outline-offset: 3px; }
+.grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.display { font-family: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; font-weight: 400; letter-spacing: -.025em; line-height: .95; }
+.frost { backdrop-filter: blur(26px) saturate(1.1); -webkit-backdrop-filter: blur(26px) saturate(1.1); background: linear-gradient(135deg, rgba(233,238,242,.55), rgba(169,207,230,.35)); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 38s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
