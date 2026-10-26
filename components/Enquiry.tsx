@@ -45,8 +45,8 @@ export default function Enquiry() {
       <label className="block"><span className="text-sm text-silver/70">Phone (optional)</span><input type="tel" className={field} autoComplete="tel" value={f.phone} onChange={(e) => set("phone", e.target.value)} {...a("phone")} /><Err k="phone" /></label>
       <label className="block"><span className="text-sm text-silver/70">Suburb or town</span><input className={field} autoComplete="address-level2" value={f.suburb} onChange={(e) => set("suburb", e.target.value)} {...a("suburb")} /><Err k="suburb" /></label>
       <label className="block md:col-span-2"><span className="text-sm text-silver/70">Space</span>
-        <select className={`${field} bg-obsidian`} value={f.type} onChange={(e) => set("type", e.target.value)} {...a("type")}>
-          <option value="">Select</option>{["Home", "Office", "Boardroom", "Hospitality", "Other commercial"].map((o) => <option key={o}>{o}</option>)}</select><Err k="type" /></label>
+        <select className={`${field} bg-obsidian text-silver`} value={f.type} onChange={(e) => set("type", e.target.value)} {...a("type")}>
+          <option className="bg-silver text-obsidian" value="">Select</option>{["Home", "Office", "Boardroom", "Hospitality", "Other commercial"].map((o) => <option className="bg-silver text-obsidian" key={o}>{o}</option>)}</select><Err k="type" /></label>
       <label className="block md:col-span-2"><span className="text-sm text-silver/70">Tell us about the glass: windows or doors, rough sizes, glass type if known</span>
         <textarea rows={4} className={field} value={f.message} onChange={(e) => set("message", e.target.value)} {...a("message")} /><Err k="message" /></label>
       <input tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={f.website} onChange={(e) => set("website", e.target.value)} />
