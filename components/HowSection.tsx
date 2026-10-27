@@ -98,7 +98,7 @@ export default function HowSection() {
                 mm.add(
                     {
                         motion: "(prefers-reduced-motion: no-preference)",
-                        pin: "(min-width: 1024px) and (min-height: 720px)",
+                    pin: "(min-width: 1024px) and (min-height: 640px)",
                         tablet: "(min-width: 768px)",
                     },
                     (c) => {
@@ -369,7 +369,7 @@ export default function HowSection() {
         <section
             id="how"
             ref={root}
-            className="relative overflow-hidden bg-charcoal px-6 py-24 md:px-12 md:py-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pb-8 lg:pt-24 [@media(min-width:1024px)_and_(min-height:720px)]:h-[100svh]"
+            className="relative overflow-hidden bg-charcoal px-6 py-24 md:px-12 md:py-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pb-8 lg:pt-24 [@media(min-width:1024px)_and_(min-height:640px)]:h-[100svh]"
         >
             {/* Background typography — slow drift */}
             <div
