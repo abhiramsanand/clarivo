@@ -34,3 +34,15 @@ body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-seri
 @media (hover: hover) { .marquee-track:hover { animation-play-state: paused; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 @media (prefers-reduced-motion:reduce){#enquiry .enq-form *{transition:none!important}}
+
+/* #how glass demonstration: stage keeps the photo's aspect ratio so pane geometry never drifts */
+.how-stage { position: relative; width: 100%; aspect-ratio: 718 / 708; overflow: hidden; background: #1c222a; }
+@media (min-width: 1024px) {
+  .how-slot { container-type: size; display: flex; align-items: center; justify-content: center; min-height: 26rem; flex: 1 1 0%; }
+  .how-stage { width: min(100cqw, calc(100cqh * 718 / 708)); }
+}
+.glass-range { -webkit-appearance: none; appearance: none; background: transparent; }
+.glass-range::-webkit-slider-runnable-track { background: transparent; height: 100%; }
+.glass-range::-moz-range-track { background: transparent; height: 100%; }
+.glass-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 100%; border: 0; }
+.glass-range::-moz-range-thumb { width: 0; height: 100%; border: 0; }

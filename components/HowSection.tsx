@@ -5,8 +5,13 @@
  * Drop-in replacement for the existing <section id="how">.
  *
  * - Desktop (≥1024px, ≥640px tall, motion allowed): ONE pinned, scrubbed GSAP timeline drives
- *   the three steps (assess → apply → switch), progress line, image zoom, film wipe and the
- *   clear→private demonstration.
+ *   the three steps (assess → apply → switch), progress line, a subtle image zoom, the film sweep
+ *   and the clear→private demonstration.
+ * - Only the glass changes: pane geometry lives in lib/glazing.ts and the glass-only mask / frost
+ *   plate are built by scripts/build-glass-assets.py from the same polygons. The stage keeps the
+ *   photo's aspect ratio, so every overlay is positioned in % of the photo and cannot drift.
+ * - Interaction policy: scroll drives the demo; a manual slider input takes over until the visitor
+ *   scrolls again, at which point control eases back to scroll. The slider always mirrors what is drawn.
  * - Tablet / mobile / short viewports: no pin; natural vertical sequence with light reveals.
  * - Reduced motion / no JS: complete static layout, glass comparison still works via the slider.
  *
@@ -21,6 +26,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScanLine, Layers, Sparkles } from "lucide-react";
 import Media from "@/components/Media";
 import { site } from "@/lib/site";
+import { GLAZING_BOX, PANES, polygon, svgPoints } from "@/lib/glazing";
 
 const STEPS = [
     {
@@ -40,13 +46,19 @@ const STEPS = [
     },
 ];
 
-/** The glazing area inside the photo. Tune these four values to sit on the glass in your image. */
-const PANE: CSSProperties = {
-    top: "9%",
-    right: "8%",
-    bottom: "9%",
-    left: "8%",
+const MASK_URL = `url(${site.img.howGlassMask})`;
+/** Visible glass only: inner glazing minus the plant, ottoman and sofa that sit in front of it. */
+const GLASS_MASK: CSSProperties = {
+    WebkitMaskImage: MASK_URL,
+    maskImage: MASK_URL,
+    WebkitMaskSize: "100% 100%",
+    maskSize: "100% 100%",
+    WebkitMaskRepeat: "no-repeat",
+    maskRepeat: "no-repeat",
 };
+/** x position (in % of the stage) of a 0–100 value mapped across the glazing span. */
+const AT = (v: string) => `calc((var(--gl) + var(${v}) * var(--gw) / 100) * 1%)`;
+const REVEAL = (v: string) => `inset(0 calc(100% - (var(--gl) + var(${v}) * var(--gw) / 100) * 1%) 0 0)`;
 
 const NOISE =
     "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")";
@@ -57,6 +69,8 @@ export default function HowSection() {
     const inputRef = useRef<HTMLInputElement>(null);
     const chipRef = useRef<HTMLSpanElement>(null);
     const lastLabel = useRef("Comparing");
+    /** Manual-input override: `on` while the visitor owns the state; `k` eases control back to scroll. */
+    const manual = useRef({ on: false, v: 50, at: 0, k: 1 });
 
     /** Single source of truth for the demo: v = % of the pane that is private (from the left). */
     const apply = useCallback((v: number) => {
@@ -76,6 +90,19 @@ export default function HowSection() {
             label === "Comparing" ? `Comparing, ${rounded}% private` : label,
         );
     }, []);
+
+    const onManualInput = useCallback(
+        (v: number) => {
+            const m = manual.current;
+            gsap.killTweensOf(m);
+            m.on = true;
+            m.k = 1;
+            m.v = v;
+            m.at = window.scrollY;
+            apply(v);
+        },
+        [apply],
+    );
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -98,14 +125,10 @@ export default function HowSection() {
                 mm.add(
                     {
                         motion: "(prefers-reduced-motion: no-preference)",
-                    pin: "(min-width: 1024px) and (min-height: 640px)",
-                        tablet: "(min-width: 768px)",
+                        pin: "(min-width: 1024px) and (min-height: 640px)",
                     },
                     (c) => {
-                        const { motion, pin, tablet } = c.conditions as Record<
-                            string,
-                            boolean
-                        >;
+                        const { motion, pin } = c.conditions as Record<string, boolean>;
                         if (!motion) return; // static, fully visible layout
 
                         /* ---------- Entrance (shared, plays once) ---------- */
@@ -132,7 +155,7 @@ export default function HowSection() {
                             )
                             .from(
                                 q("[data-enter]"),
-                                { scale: 1.12, duration: 1.8, ease: "power2.out" },
+                                { scale: 1.06, duration: 1.8, ease: "power2.out" },
                                 0.2,
                             );
 
@@ -164,22 +187,6 @@ export default function HowSection() {
                                     },
                                 );
                             }
-                            if (tablet) {
-                                gsap.fromTo(
-                                    q("[data-par]"),
-                                    { yPercent: -2 },
-                                    {
-                                        yPercent: 2,
-                                        ease: "none",
-                                        scrollTrigger: {
-                                            trigger: q("[data-frame]")[0],
-                                            start: "top bottom",
-                                            end: "bottom top",
-                                            scrub: true,
-                                        },
-                                    },
-                                );
-                            }
                             return;
                         }
 
@@ -190,6 +197,16 @@ export default function HowSection() {
                         const countWrap = q("[data-count-wrap]");
                         const pane = q("[data-pane]")[0];
                         const st = { p: 0 };
+                        const m = manual.current;
+                        m.on = false;
+                        m.k = 1;
+                        const D = 3.3; // timeline length: switch ends at 2.85, then the private state holds
+
+                        /** What is drawn: scroll value, unless the visitor has taken over (or control is easing back). */
+                        const show = () => {
+                            const v = m.on ? m.v : m.k < 1 ? m.v + (st.p - m.v) * m.k : st.p;
+                            apply(v);
+                        };
 
                         list?.setAttribute("data-dim", "true");
                         gsap.set(countWrap, { autoAlpha: 1 });
@@ -198,7 +215,7 @@ export default function HowSection() {
 
                         let cur = -1;
                         const setActive = (prog: number) => {
-                            const i = prog < 0.31 ? 0 : prog < 0.64 ? 1 : 2;
+                            const i = prog < 0.3 ? 0 : prog < 0.62 ? 1 : 2;
                             if (i === cur) return;
                             cur = i;
                             stepEls.forEach((s, n) => {
@@ -219,43 +236,46 @@ export default function HowSection() {
                             scrollTrigger: {
                                 trigger: el,
                                 start: "top top",
-                                end: () => `+=${Math.round(window.innerHeight * 2.6)}`,
+                                end: () => `+=${Math.round(window.innerHeight * 2.8)}`,
                                 pin: true,
                                 scrub: 0.6,
                                 anticipatePin: 1,
                                 invalidateOnRefresh: true,
-                                onUpdate: (self) => setActive(self.progress),
+                                onUpdate: (self) => {
+                                    setActive(self.progress);
+                                    // Scrolling hands control back from the slider to the scroll sequence.
+                                    if (m.on && Math.abs(self.scroll() - m.at) > 6) {
+                                        m.on = false;
+                                        m.k = 0;
+                                        gsap.to(m, {
+                                            k: 1,
+                                            duration: 0.35,
+                                            ease: "power2.out",
+                                            overwrite: true,
+                                            onUpdate: show,
+                                        });
+                                    }
+                                },
                                 onRefresh: (self) => setActive(self.progress),
                             },
                         });
 
-                        // Whole-sequence layers (progress, depth)
-                        tl.fromTo(
-                            q("[data-bar]"),
-                            { scaleY: 0 },
-                            { scaleY: 1, duration: 3 },
-                            0,
-                        )
-                            .fromTo(
-                                q("[data-par]"),
-                                { yPercent: -3 },
-                                { yPercent: 3, duration: 3 },
-                                0,
-                            )
+                        // Whole-sequence layers (progress, restrained glass reflection, type drift)
+                        tl.fromTo(q("[data-bar]"), { scaleY: 0 }, { scaleY: 1, duration: D }, 0)
                             .fromTo(
                                 q("[data-glint]"),
                                 { xPercent: -90 },
-                                { xPercent: 260, duration: 3 },
+                                { xPercent: 260, duration: D },
                                 0,
                             )
                             .fromTo(
                                 q("[data-bgtype]"),
                                 { xPercent: 2 },
-                                { xPercent: -12, duration: 3 },
+                                { xPercent: -12, duration: D },
                                 0,
                             );
 
-                        // Step 1 — Assess: existing glass is outlined and scanned (image stays clear)
+                        // Step 1 — Assess: the glazing is outlined and scanned (photo stays clear)
                         tl.fromTo(
                             q("[data-pane-border]"),
                             { opacity: 0.3 },
@@ -275,42 +295,45 @@ export default function HowSection() {
                             )
                             .to(q("[data-scan]"), { opacity: 0, duration: 0.1 }, 0.85);
 
-                        // Step 2 — Apply: closer view, film sheet wipes across the pane, then settles
+                        // Step 2 — Apply: a gentle push-in, film sweeps across every pane, then settles
                         tl.to(
                             q("[data-zoom]"),
-                            { scale: 1.12, duration: 0.4, ease: "power2.inOut" },
+                            { scale: 1.035, duration: 0.5, ease: "power2.inOut" },
                             0.95,
                         )
                             .fromTo(
                                 pane,
                                 { "--film": 0 },
-                                { "--film": 100, duration: 0.6, ease: "power1.inOut" },
-                                1.25,
+                                { "--film": 100, duration: 0.8, ease: "power1.inOut" },
+                                1.15,
                             )
-                            .to(q("[data-film]"), { opacity: 0, duration: 0.25 }, 2.0)
+                            .to(q("[data-film]"), { opacity: 0, duration: 0.25 }, 1.95)
                             .to(
                                 q("[data-zoom]"),
                                 { scale: 1, duration: 0.5, ease: "power2.inOut" },
                                 2.0,
                             );
 
-                        // Step 3 — Switch: demonstration moves from clear to private, then holds
+                        // Step 3 — Switch: all panes move clear → private together, then hold
                         tl.to(
                             st,
                             {
                                 p: 100,
-                                duration: 0.6,
+                                duration: 0.7,
                                 ease: "power1.inOut",
-                                onUpdate: () => apply(st.p),
-                                onReverseComplete: () => apply(0),
+                                onUpdate: show,
+                                onReverseComplete: show,
                             },
-                            2.25,
+                            2.15,
                         );
 
                         pinTrigger = tl.scrollTrigger ?? null;
 
                         return () => {
                             pinTrigger = null;
+                            gsap.killTweensOf(m);
+                            m.on = false;
+                            m.k = 1;
                             list?.removeAttribute("data-dim");
                             stepEls.forEach((s) => {
                                 s.removeAttribute("data-active");
@@ -329,7 +352,7 @@ export default function HowSection() {
             watchdog = setTimeout(() => {
                 if (cancelled || retried) return;
                 const expected =
-                    window.matchMedia("(min-width: 1024px) and (min-height: 720px)")
+                    window.matchMedia("(min-width: 1024px) and (min-height: 640px)")
                         .matches &&
                     window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
                 if (
@@ -417,166 +440,198 @@ export default function HowSection() {
 
                 {/* ---------- Image + glass demonstration ---------- */}
                 <div className="lg:col-span-7 lg:col-start-6 lg:row-span-2 lg:row-start-1 lg:flex lg:min-h-0 lg:flex-col">
-                    <div
-                        ref={frameRef}
-                        data-frame
-                        style={{ "--p": 50, "--film": 0 } as CSSProperties}
-                        className="relative aspect-[4/3] w-full overflow-hidden border border-silver/20 lg:aspect-auto lg:min-h-[26rem] lg:flex-1"
-                    >
-                        {/* parallax layer (oversized so it never exposes edges) */}
+                    <div className="how-slot">
                         <div
-                            data-par
-                            className="absolute inset-x-0 -inset-y-[4%] will-change-transform"
+                            ref={frameRef}
+                            data-frame
+                            style={
+                                {
+                                    "--p": 50,
+                                    "--film": 0,
+                                    "--gl": GLAZING_BOX.left,
+                                    "--gw": GLAZING_BOX.width,
+                                } as CSSProperties
+                            }
+                            className="how-stage"
                         >
-                            <div
-                                data-zoom
-                                className="relative h-full w-full will-change-transform"
-                            >
-                                <div data-enter className="relative h-full w-full">
+                            <div data-enter className="absolute inset-0">
+                                <div data-zoom className="absolute inset-0 will-change-transform">
                                     <Media
-                                        src={site.img.residential}
-                                        alt="Interior seen through large glazing, shown in its clear and private states"
-                                        className="h-full w-full"
+                                        src={site.img.howRoom}
+                                        alt="Modern living room with floor-to-ceiling sliding windows, shown with the glass clear and private"
+                                        className="absolute inset-0 h-full w-full"
                                     />
 
-                                    {/* The glazing pane: everything product-related lives inside it, aligned to the photo */}
-                                    <div data-pane className="absolute" style={PANE}>
-                                        <div
-                                            data-pane-border
-                                            aria-hidden
-                                            className="absolute inset-0 border border-silver/55"
-                                        />
-
-                                        {/* Step 1: scan line */}
-                                        <div
-                                            data-scan
-                                            aria-hidden
-                                            className="pointer-events-none absolute inset-0 opacity-0"
-                                        >
-                                            <div className="h-px w-full bg-glacier shadow-[0_0_12px_rgba(150,200,230,.8)]" />
-                                        </div>
-
-                                        {/* Step 2: film sheet wiping across the glass */}
-                                        <div
-                                            data-film
-                                            aria-hidden
-                                            className="pointer-events-none absolute inset-0"
-                                        >
-                                            <div
-                                                className="absolute inset-0"
-                                                style={{
-                                                    clipPath:
-                                                        "inset(0 calc(100% - var(--film) * 1%) 0 0)",
-                                                    background:
-                                                        "linear-gradient(120deg, rgba(190,220,238,.16), rgba(120,170,200,.08) 55%, rgba(220,238,248,.14))",
-                                                }}
-                                            />
-                                            <div
-                                                className="absolute inset-y-0 w-px bg-white/70 shadow-[0_0_10px_rgba(255,255,255,.55)]"
-                                                style={{
-                                                    left: "calc(var(--film) * 1%)",
-                                                    opacity: "var(--film)",
-                                                }}
-                                            />
-                                        </div>
-
-                                        {/* Step 3: frosted (private) state, revealed from the left up to the divider */}
+                                    {/* Glazing overlay: masked to the visible glass only (frames, plant, ottoman and sofa stay untouched) */}
+                                    <div
+                                        data-pane
+                                        aria-hidden
+                                        className="pointer-events-none absolute inset-0"
+                                        style={GLASS_MASK}
+                                    >
+                                        {/* Step 3: private state, revealed from the left across every pane */}
                                         <div
                                             data-frost
-                                            aria-hidden
-                                            className="pointer-events-none absolute inset-0"
+                                            className="absolute inset-0"
                                             style={{
-                                                clipPath: "inset(0 calc(100% - var(--p) * 1%) 0 0)",
-                                                backdropFilter:
-                                                    "blur(18px) saturate(.8) brightness(1.08)",
-                                                WebkitBackdropFilter:
-                                                    "blur(18px) saturate(.8) brightness(1.08)",
-                                                background:
-                                                    "linear-gradient(135deg, rgba(238,246,250,.26) 0%, rgba(196,218,232,.14) 55%, rgba(238,246,250,.22) 100%)",
+                                                clipPath: REVEAL("--p"),
+                                                backgroundImage: `url(${site.img.howGlassFrost})`,
+                                                backgroundSize: "100% 100%",
                                             }}
                                         >
                                             <div
-                                                className="absolute inset-0 opacity-[.28] mix-blend-soft-light"
+                                                className="absolute inset-0 opacity-[.22] mix-blend-soft-light"
                                                 style={{ backgroundImage: NOISE }}
                                             />
                                             <div
                                                 className="absolute inset-0"
                                                 style={{
                                                     background:
-                                                        "linear-gradient(110deg, transparent 25%, rgba(255,255,255,.14) 40%, transparent 55%)",
+                                                        "linear-gradient(110deg, transparent 25%, rgba(255,255,255,.12) 40%, transparent 55%)",
                                                 }}
                                             />
                                         </div>
 
-                                        {/* Interactive comparison: native range input = mouse, touch and keyboard for free */}
-                                        <input
-                                            ref={inputRef}
-                                            type="range"
-                                            min={0}
-                                            max={100}
-                                            step={1}
-                                            defaultValue={50}
-                                            aria-label="Compare the private and clear glass states"
-                                            aria-valuetext="Comparing, 50% private"
-                                            onInput={(e) => apply(Number(e.currentTarget.value))}
-                                            className="peer absolute inset-0 z-10 m-0 h-full w-full cursor-ew-resize touch-pan-y opacity-0"
-                                        />
-                                        <div
-                                            aria-hidden
-                                            className="pointer-events-none absolute inset-y-0 w-px bg-[#f4efe6]/80 peer-focus-visible:[&>span]:ring-2 peer-focus-visible:[&>span]:ring-champagne"
-                                            style={{ left: "calc(var(--p) * 1%)" }}
-                                        >
-                                            <span className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#f4efe6]/70 bg-obsidian/50 backdrop-blur-sm">
-                                                <svg
-                                                    width="20"
-                                                    height="10"
-                                                    viewBox="0 0 20 10"
-                                                    fill="none"
-                                                    className="text-[#f4efe6]"
+                                        {/* One element per pane, each clipped to its own inner glass boundary */}
+                                        {PANES.map((p) => (
+                                            <div
+                                                key={p.id}
+                                                data-glass-pane={p.id}
+                                                className="absolute inset-0 overflow-hidden"
+                                                style={{ clipPath: polygon(p.points) }}
+                                            >
+                                                {/* Step 1: scan line */}
+                                                <div
+                                                    data-scan
+                                                    className="absolute inset-x-0 opacity-0"
+                                                    style={{
+                                                        top: `${GLAZING_BOX.top}%`,
+                                                        height: `${GLAZING_BOX.height}%`,
+                                                    }}
                                                 >
-                                                    <path
-                                                        d="M6 1 1 5l5 4M14 1l5 4-5 4"
-                                                        stroke="currentColor"
-                                                        strokeWidth="1"
-                                                    />
-                                                </svg>
-                                            </span>
-                                        </div>
+                                                    <div className="h-px w-full bg-glacier shadow-[0_0_10px_rgba(150,200,230,.7)]" />
+                                                </div>
 
-                                        {/* Side tags */}
-                                        <span className="pointer-events-none absolute left-3 top-3 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/80">
-                                            Private
-                                        </span>
-                                        <span className="pointer-events-none absolute right-3 top-3 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/80">
-                                            Clear
+                                                {/* Step 2: film sheet installed across the glass */}
+                                                <div data-film className="absolute inset-0">
+                                                    <div
+                                                        className="absolute inset-0"
+                                                        style={{
+                                                            clipPath: REVEAL("--film"),
+                                                            background:
+                                                                "linear-gradient(120deg, rgba(190,220,238,.14), rgba(120,170,200,.06) 55%, rgba(220,238,248,.12))",
+                                                        }}
+                                                    />
+                                                    <div
+                                                        className="absolute inset-y-0 w-px bg-white/60"
+                                                        style={{
+                                                            left: AT("--film"),
+                                                            opacity: "calc(var(--film) * 1)",
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                {/* Restrained reflection travelling across the glass */}
+                                                <div
+                                                    data-glint
+                                                    className="absolute inset-y-0 left-0 w-1/3 opacity-30 mix-blend-screen"
+                                                    style={{
+                                                        background:
+                                                            "linear-gradient(105deg, transparent 0%, rgba(255,255,255,.16) 50%, transparent 100%)",
+                                                    }}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Glazing outline (inner glass boundaries, not the outer frame) */}
+                                    <svg
+                                        data-pane-border
+                                        aria-hidden
+                                        viewBox="0 0 100 100"
+                                        preserveAspectRatio="none"
+                                        className="pointer-events-none absolute inset-0 h-full w-full"
+                                    >
+                                        {PANES.map((p) => (
+                                            <polygon
+                                                key={p.id}
+                                                points={svgPoints(p.points)}
+                                                fill="none"
+                                                stroke="rgba(233,238,242,.5)"
+                                                strokeWidth={1}
+                                                vectorEffect="non-scaling-stroke"
+                                            />
+                                        ))}
+                                    </svg>
+
+                                    {/* Interactive comparison: native range input = mouse, touch and keyboard.
+                                        Its range is exactly the glazing span, so the thumb, divider and frost edge coincide. */}
+                                    <input
+                                        ref={inputRef}
+                                        type="range"
+                                        min={0}
+                                        max={100}
+                                        step={1}
+                                        defaultValue={50}
+                                        aria-label="Compare the private and clear glass states"
+                                        aria-valuetext="Comparing, 50% private"
+                                        onInput={(e) => onManualInput(Number(e.currentTarget.value))}
+                                        className="glass-range peer absolute z-10 m-0 cursor-ew-resize touch-pan-y opacity-0"
+                                        style={{
+                                            left: `${GLAZING_BOX.left}%`,
+                                            width: `${GLAZING_BOX.width}%`,
+                                            top: `${GLAZING_BOX.top}%`,
+                                            height: `${GLAZING_BOX.height}%`,
+                                        }}
+                                    />
+                                    <div
+                                        aria-hidden
+                                        className="pointer-events-none absolute w-px bg-[#f4efe6]/80 peer-focus-visible:[&>span]:ring-2 peer-focus-visible:[&>span]:ring-champagne"
+                                        style={{
+                                            left: AT("--p"),
+                                            top: `${GLAZING_BOX.top}%`,
+                                            height: `${GLAZING_BOX.height}%`,
+                                        }}
+                                    >
+                                        <span className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#f4efe6]/70 bg-obsidian/50 backdrop-blur-sm">
+                                            <svg
+                                                width="20"
+                                                height="10"
+                                                viewBox="0 0 20 10"
+                                                fill="none"
+                                                className="text-[#f4efe6]"
+                                            >
+                                                <path
+                                                    d="M6 1 1 5l5 4M14 1l5 4-5 4"
+                                                    stroke="currentColor"
+                                                    strokeWidth="1"
+                                                />
+                                            </svg>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Foreground glass reflection (independent, subtle) + tonal grade */}
-                        <div
-                            data-glint
-                            aria-hidden
-                            className="pointer-events-none absolute inset-y-0 left-0 w-1/3 opacity-40 mix-blend-screen"
-                            style={{
-                                background:
-                                    "linear-gradient(105deg, transparent 0%, rgba(255,255,255,.16) 50%, transparent 100%)",
-                            }}
-                        />
-                        <div
-                            aria-hidden
-                            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/45 via-transparent to-transparent"
-                        />
-
-                        {/* State label */}
-                        <div className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 border border-silver/25 bg-obsidian/60 px-3 py-2 text-[10px] uppercase tracking-[.3em] text-[#f4efe6] backdrop-blur-sm">
-                            <span
+                            {/* Fixed UI: frame line, tonal grade, side tags, state label */}
+                            <div
                                 aria-hidden
-                                className="h-1.5 w-1.5 rounded-full bg-champagne"
+                                className="pointer-events-none absolute inset-0 border border-silver/20 bg-gradient-to-t from-obsidian/35 via-transparent to-transparent"
                             />
-                            <span ref={chipRef}>Comparing</span>
+                            <span className="pointer-events-none absolute left-3 top-3 bg-obsidian/55 px-2 py-1 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/90 backdrop-blur-sm">
+                                Private
+                            </span>
+                            <span className="pointer-events-none absolute right-3 top-3 bg-obsidian/55 px-2 py-1 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/90 backdrop-blur-sm">
+                                Clear
+                            </span>
+                            <div className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 border border-silver/25 bg-obsidian/60 px-3 py-2 text-[10px] uppercase tracking-[.3em] text-[#f4efe6] backdrop-blur-sm">
+                                <span
+                                    aria-hidden
+                                    className="h-1.5 w-1.5 rounded-full bg-champagne"
+                                />
+                                <span ref={chipRef} role="status">
+                                    Comparing
+                                </span>
+                            </div>
                         </div>
                     </div>
 
