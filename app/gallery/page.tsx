@@ -17,7 +17,7 @@ import type { MouseEvent, TouchEvent } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import Media from "@/components/Media";
 import { site } from "@/lib/site";
 
@@ -415,8 +415,12 @@ export default function GalleryPage() {
     <main ref={root} className="relative min-h-screen overflow-x-clip bg-ivory text-ink">
       {SHOW_BAR && (
         <div className="fixed inset-x-0 top-0 z-40 flex items-center justify-between bg-gradient-to-b from-ivory/90 to-transparent px-6 py-5 md:px-12">
-          <Link href="/" className="display text-xl tracking-[.08em] text-ink" aria-label="Clarivo home">
-            {site.brand}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-ink/20 px-5 py-2 text-sm text-ink transition hover:bg-ink hover:text-warm"
+          >
+            <ArrowLeft aria-hidden="true" size={16} />
+            Back to home
           </Link>
           <Link
             href="/#enquiry"
