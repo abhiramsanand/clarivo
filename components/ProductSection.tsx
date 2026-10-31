@@ -6,7 +6,7 @@
  *
  * ASSUMPTIONS (adjust to your project):
  *  - `Media` and `site` import paths below.
- *  - Tailwind tokens `obsidian`, `silver`, `glacier` exist; ivory/champagne use arbitrary values.
+ *  - Tailwind tokens: ivory, ink, muted, line, mist, eucalyptus, warm (see tailwind.config.ts).
  *  - This section deliberately does NOT use data-x / data-split / data-reveal / data-speed / data-clip,
  *    so a global animation utility that scans those attributes won't double-animate it.
  *    All motion is scoped to this component via gsap.context() + gsap.matchMedia().
@@ -130,12 +130,12 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
     <section
       id="product"
       ref={root}
-      className="relative overflow-hidden bg-obsidian px-6 py-28 md:px-12 md:py-40 lg:py-48"
+      className="relative overflow-hidden bg-ivory px-6 py-28 md:px-12 md:py-40 lg:py-48"
     >
       {/* Atmosphere */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_75%_30%,rgba(150,190,215,.10),transparent_70%),radial-gradient(50%_40%_at_10%_90%,rgba(201,180,138,.05),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_75%_30%,rgba(184,196,197,.28),transparent_70%),radial-gradient(50%_40%_at_10%_90%,rgba(227,222,211,.7),transparent_70%)]"
       />
 
       {/* Background typography (three isolated layers: entrance / parallax / exit fade) */}
@@ -144,7 +144,7 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
           <div data-bgtype-fade>
             <div data-bgtype className="will-change-transform">
               <p
-                className="display whitespace-nowrap text-[26vw] leading-none text-silver/[.05] md:text-[20vw]"
+                className="display whitespace-nowrap text-[26vw] leading-none text-ink/[.05] md:text-[20vw]"
                 style={{
                   WebkitMaskImage: "linear-gradient(180deg,#000 30%,transparent 95%)",
                   maskImage: "linear-gradient(180deg,#000 30%,transparent 95%)",
@@ -161,13 +161,13 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
         {/* ---------- Text column ---------- */}
         <div className="md:col-span-5 md:pt-20 lg:pt-28">
           <div data-text-parallax>
-            <div data-eyebrow className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-champagne">
+            <div data-eyebrow className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
               <span>01</span>
-              <span aria-hidden className="h-px w-10 bg-champagne/60" />
+              <span aria-hidden className="h-px w-10 bg-eucalyptus/60" />
               <span>The Smart Film Difference</span>
             </div>
 
-            <h2 className="display mt-8 text-[clamp(2.4rem,5.2vw,5rem)] leading-[1.02] tracking-[-0.01em] text-[#f4efe6]">
+            <h2 className="display mt-8 text-[clamp(2.4rem,5.2vw,5rem)] leading-[1.02] tracking-[-0.01em] text-ink">
               <span className="block overflow-hidden pb-[.2em]">
                 <span data-line className="block">The window stays.</span>
               </span>
@@ -175,13 +175,13 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
                 <span data-line className="block">The view becomes</span>
               </span>
               <span className="block overflow-hidden pb-[.2em]">
-                <span data-line className="block italic text-[#f4efe6]/90">yours to control.</span>
+                <span data-line className="block italic text-ink/90">yours to control.</span>
               </span>
             </h2>
 
-            <div data-rule aria-hidden className="mt-10 h-px w-full max-w-md bg-silver/25" />
+            <div data-rule aria-hidden className="mt-10 h-px w-full max-w-md bg-line" />
 
-            <p data-fade className="mt-8 max-w-md leading-relaxed text-silver/70">
+            <p data-fade className="mt-8 max-w-md leading-relaxed text-ink/70">
               Clarivo film is applied to existing glass, so windows and doors that already suit your space can gain a
               private state without being replaced. Suitability depends on the glass, which is why we start with an
               assessment.
@@ -190,7 +190,7 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
             <a
               data-fade
               href={ctaHref}
-              className="group mt-10 inline-flex items-center gap-4 border-b border-champagne/40 pb-2 text-sm uppercase tracking-[.2em] text-[#f4efe6] transition-colors duration-500 hover:border-champagne"
+              className="group mt-10 inline-flex items-center gap-4 border-b border-eucalyptus/40 pb-2 text-sm uppercase tracking-[.2em] text-ink transition-colors duration-500 hover:border-eucalyptus"
             >
               Discover the film
               <svg
@@ -199,7 +199,7 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
                 height="10"
                 viewBox="0 0 22 10"
                 fill="none"
-                className="text-champagne transition-transform duration-500 ease-out group-hover:translate-x-1.5"
+                className="text-eucalyptus transition-transform duration-500 ease-out group-hover:translate-x-1.5"
               >
                 <path d="M0 5h20M16 1l4 4-4 4" stroke="currentColor" strokeWidth="1" />
               </svg>
@@ -211,14 +211,14 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
         <div className="relative md:col-span-7">
           {/* Decorative linework */}
           <div data-line-parallax aria-hidden className="pointer-events-none absolute -right-2 -top-8 hidden h-40 w-40 md:block">
-            <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-silver/30 to-transparent" />
-            <div className="absolute right-0 top-0 h-px w-full bg-gradient-to-l from-silver/30 to-transparent" />
+            <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-mist to-transparent" />
+            <div className="absolute right-0 top-0 h-px w-full bg-gradient-to-l from-mist to-transparent" />
           </div>
 
           {/* Image: frame (clip) > parallax layer > scale layer > Media */}
           <div
             data-frame
-            className="relative aspect-[4/5] w-full overflow-hidden border border-silver/20 md:aspect-[5/6] lg:aspect-[6/7]"
+            className="relative aspect-[4/5] w-full overflow-hidden border border-line md:aspect-[5/6] lg:aspect-[6/7]"
           >
             <div data-img-parallax className="absolute inset-x-0 -inset-y-[6%] will-change-transform">
               <div data-scale className="h-full w-full will-change-transform">
@@ -232,10 +232,10 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
             {/* Controlled grade */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,12,.0)_55%,rgba(8,10,12,.55)_100%),linear-gradient(120deg,rgba(150,190,215,.10),transparent_45%)]"
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(37,45,46,0)_55%,rgba(37,45,46,.4)_100%),linear-gradient(120deg,rgba(184,196,197,.15),transparent_45%)]"
             />
             {/* Corner index */}
-            <span className="absolute left-4 top-4 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/70">
+            <span className="absolute left-4 top-4 text-[10px] uppercase tracking-[.3em] text-warm/85">
               Fig. 01 — Glazing
             </span>
           </div>
@@ -251,8 +251,8 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
               <div data-film-float className="relative will-change-transform">
                 <FilmSheet />
                 <div className="mt-4 flex items-center gap-3">
-                  <span aria-hidden className="h-px w-8 bg-champagne/70" />
-                  <span className="text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/80">Switchable Smart Film</span>
+                  <span aria-hidden className="h-px w-8 bg-eucalyptus/70" />
+                  <span className="text-[10px] uppercase tracking-[.3em] text-ink/80">Switchable Smart Film</span>
                 </div>
               </div>
             </div>
@@ -268,23 +268,23 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
 
 /**
  * Smart-film sheet built from layered gradients.
- * - Flat translucent sheet with cool silver/glacier body
+ * - Flat translucent sheet with cool mist body
  * - Rolled edge on the left: cylindrical shading + inner curl shadow
  * - Fine edge highlight, soft specular glint (animated via [data-film-glint])
  */
 function FilmSheet() {
   return (
-    <div className="relative aspect-[3/2] w-full drop-shadow-[0_30px_40px_rgba(0,0,0,.55)]">
+    <div className="relative aspect-[3/2] w-full drop-shadow-[0_30px_40px_rgba(37,45,46,.28)]">
       {/* Sheet body */}
       <div
         className="absolute inset-y-[3%] left-[12%] right-0 overflow-hidden rounded-r-[3px]"
         style={{
           background:
-            "linear-gradient(135deg, rgba(235,244,250,.55) 0%, rgba(170,200,220,.28) 38%, rgba(120,160,190,.22) 70%, rgba(220,235,245,.40) 100%)",
+            "linear-gradient(135deg, rgba(252,251,248,.6) 0%, rgba(184,196,197,.35) 38%, rgba(150,168,170,.28) 70%, rgba(244,241,234,.5) 100%)",
           backdropFilter: "blur(10px) saturate(1.2)",
           WebkitBackdropFilter: "blur(10px) saturate(1.2)",
           boxShadow:
-            "inset 0 0 0 1px rgba(255,255,255,.22), inset 0 1px 0 rgba(255,255,255,.55), inset 0 -18px 30px -18px rgba(20,40,60,.35)",
+            "inset 0 0 0 1px rgba(252,251,248,.22), inset 0 1px 0 rgba(252,251,248,.55), inset 0 -18px 30px -18px rgba(37,45,46,.25)",
         }}
       >
         {/* Fine linear grain from the film substrate */}
@@ -292,7 +292,7 @@ function FilmSheet() {
           className="absolute inset-0 opacity-[.18] mix-blend-overlay"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(100deg, rgba(255,255,255,.7) 0 1px, transparent 1px 5px)",
+              "repeating-linear-gradient(100deg, rgba(252,251,248,.7) 0 1px, transparent 1px 5px)",
           }}
         />
         {/* Soft diagonal highlight */}
@@ -300,7 +300,7 @@ function FilmSheet() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(115deg, transparent 20%, rgba(255,255,255,.38) 32%, transparent 44%)",
+              "linear-gradient(115deg, transparent 20%, rgba(252,251,248,.38) 32%, transparent 44%)",
           }}
         />
         {/* Scroll-driven glint */}
@@ -309,12 +309,12 @@ function FilmSheet() {
           className="absolute inset-y-0 left-0 w-[35%] mix-blend-screen"
           style={{
             background:
-              "linear-gradient(100deg, transparent 0%, rgba(255,255,255,.55) 50%, transparent 100%)",
+              "linear-gradient(100deg, transparent 0%, rgba(252,251,248,.55) 50%, transparent 100%)",
             filter: "blur(6px)",
           }}
         />
         {/* Top/right edge highlight */}
-        <div className="absolute inset-x-0 top-0 h-px bg-white/70" />
+        <div className="absolute inset-x-0 top-0 h-px bg-warm/70" />
       </div>
 
       {/* Rolled edge (cylinder) */}
@@ -322,19 +322,19 @@ function FilmSheet() {
         className="absolute inset-y-0 left-0 w-[17%] rounded-[999px/12%]"
         style={{
           background:
-            "linear-gradient(90deg, rgba(40,60,78,.85) 0%, rgba(120,150,175,.75) 14%, rgba(240,248,255,.95) 34%, rgba(170,200,220,.8) 52%, rgba(90,120,145,.75) 78%, rgba(30,48,64,.85) 100%)",
+            "linear-gradient(90deg, rgba(52,75,82,.85) 0%, rgba(120,140,144,.75) 14%, rgba(252,251,248,.95) 34%, rgba(184,196,197,.85) 52%, rgba(100,120,124,.75) 78%, rgba(52,75,82,.85) 100%)",
           boxShadow:
-            "inset 0 0 0 1px rgba(255,255,255,.25), 6px 0 14px -4px rgba(0,0,0,.45)",
+            "inset 0 0 0 1px rgba(252,251,248,.25), 6px 0 14px -4px rgba(37,45,46,.3)",
         }}
       >
         {/* Specular line down the roll */}
-        <div className="absolute inset-y-[6%] left-[36%] w-[6%] rounded-full bg-white/80 blur-[1.5px]" />
+        <div className="absolute inset-y-[6%] left-[36%] w-[6%] rounded-full bg-warm/80 blur-[1.5px]" />
         {/* Spiral hint at the roll's end */}
         <div
           className="absolute inset-x-[8%] top-0 h-[7%] rounded-[50%]"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 50%, rgba(10,18,26,.85) 0 30%, rgba(190,215,232,.9) 32% 48%, rgba(60,85,105,.9) 50% 100%)",
+              "radial-gradient(ellipse at 50% 50%, rgba(37,45,46,.85) 0 30%, rgba(184,196,197,.9) 32% 48%, rgba(52,75,82,.9) 50% 100%)",
           }}
         />
       </div>
@@ -342,7 +342,7 @@ function FilmSheet() {
       {/* Contact shadow where the sheet rests off the roll */}
       <div
         aria-hidden
-        className="absolute left-[16%] top-[3%] h-[94%] w-[6%] bg-gradient-to-r from-black/35 to-transparent"
+        className="absolute left-[16%] top-[3%] h-[94%] w-[6%] bg-gradient-to-r from-ink/30 to-transparent"
       />
     </div>
   );

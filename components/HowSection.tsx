@@ -392,7 +392,7 @@ export default function HowSection() {
         <section
             id="how"
             ref={root}
-            className="relative overflow-hidden bg-charcoal px-6 py-24 md:px-12 md:py-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pb-8 lg:pt-24 [@media(min-width:1024px)_and_(min-height:640px)]:h-[100svh]"
+            className="relative overflow-hidden bg-limestone px-6 py-24 md:px-12 md:py-32 lg:flex lg:min-h-[100svh] lg:items-center lg:pb-8 lg:pt-24 [@media(min-width:1024px)_and_(min-height:640px)]:h-[100svh]"
         >
             {/* Background typography — slow drift */}
             <div
@@ -400,7 +400,7 @@ export default function HowSection() {
                 className="pointer-events-none absolute inset-x-0 bottom-2 select-none"
             >
                 <div data-bgtype className="will-change-transform">
-                    <p className="display whitespace-nowrap text-[18vw] leading-none text-silver/[.03]">
+                    <p className="display whitespace-nowrap text-[18vw] leading-none text-ink/[.03]">
                         Assess · Apply · Switch
                     </p>
                 </div>
@@ -411,15 +411,15 @@ export default function HowSection() {
                 <div className="lg:col-span-5 lg:row-start-1">
                     <p
                         data-eyebrow
-                        className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-champagne"
+                        className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus"
                     >
                         <span>How it works</span>
-                        <span aria-hidden className="text-silver/40">
+                        <span aria-hidden className="text-ink/70">
                             /
                         </span>
                         <span>01—03</span>
                     </p>
-                    <h2 className="display mt-5 text-[clamp(2rem,8vw,3rem)] leading-[1.04] tracking-[-0.01em] text-[#f4efe6] lg:text-[clamp(1.8rem,min(3vw,5.4vh),3rem)]">
+                    <h2 className="display mt-5 text-[clamp(2rem,8vw,3rem)] leading-[1.04] tracking-[-0.01em] text-ink lg:text-[clamp(1.8rem,min(3vw,5.4vh),3rem)]">
                         <span className="block overflow-hidden pb-[.1em]">
                             <span data-line className="block">
                                 From clear glass
@@ -431,7 +431,7 @@ export default function HowSection() {
                             </span>
                         </span>
                         <span className="block overflow-hidden pb-[.1em]">
-                            <span data-line className="block italic text-[#f4efe6]/85">
+                            <span data-line className="block italic text-ink/85">
                                 Three simple steps.
                             </span>
                         </span>
@@ -487,7 +487,7 @@ export default function HowSection() {
                                                 className="absolute inset-0"
                                                 style={{
                                                     background:
-                                                        "linear-gradient(110deg, transparent 25%, rgba(255,255,255,.12) 40%, transparent 55%)",
+                                                        "linear-gradient(110deg, transparent 25%, rgba(252,251,248,.12) 40%, transparent 55%)",
                                                 }}
                                             />
                                         </div>
@@ -509,7 +509,7 @@ export default function HowSection() {
                                                         height: `${GLAZING_BOX.height}%`,
                                                     }}
                                                 >
-                                                    <div className="h-px w-full bg-glacier shadow-[0_0_10px_rgba(150,200,230,.7)]" />
+                                                    <div className="h-px w-full bg-warm shadow-[0_0_10px_rgba(252,251,248,.7)]" />
                                                 </div>
 
                                                 {/* Step 2: film sheet installed across the glass */}
@@ -519,11 +519,11 @@ export default function HowSection() {
                                                         style={{
                                                             clipPath: REVEAL("--film"),
                                                             background:
-                                                                "linear-gradient(120deg, rgba(190,220,238,.14), rgba(120,170,200,.06) 55%, rgba(220,238,248,.12))",
+                                                                "linear-gradient(120deg, rgba(184,196,197,.18), rgba(150,168,170,.08) 55%, rgba(244,241,234,.14))",
                                                         }}
                                                     />
                                                     <div
-                                                        className="absolute inset-y-0 w-px bg-white/60"
+                                                        className="absolute inset-y-0 w-px bg-warm/60"
                                                         style={{
                                                             left: AT("--film"),
                                                             opacity: "calc(var(--film) * 1)",
@@ -537,7 +537,7 @@ export default function HowSection() {
                                                     className="absolute inset-y-0 left-0 w-1/3 opacity-30 mix-blend-screen"
                                                     style={{
                                                         background:
-                                                            "linear-gradient(105deg, transparent 0%, rgba(255,255,255,.16) 50%, transparent 100%)",
+                                                            "linear-gradient(105deg, transparent 0%, rgba(252,251,248,.16) 50%, transparent 100%)",
                                                     }}
                                                 />
                                             </div>
@@ -557,7 +557,7 @@ export default function HowSection() {
                                                 key={p.id}
                                                 points={svgPoints(p.points)}
                                                 fill="none"
-                                                stroke="rgba(233,238,242,.5)"
+                                                stroke="rgba(252,251,248,.5)"
                                                 strokeWidth={1}
                                                 vectorEffect="non-scaling-stroke"
                                             />
@@ -586,20 +586,20 @@ export default function HowSection() {
                                     />
                                     <div
                                         aria-hidden
-                                        className="pointer-events-none absolute w-px bg-[#f4efe6]/80 peer-focus-visible:[&>span]:ring-2 peer-focus-visible:[&>span]:ring-champagne"
+                                        className="pointer-events-none absolute w-px bg-warm/80 peer-focus-visible:[&>span]:ring-2 peer-focus-visible:[&>span]:ring-warm"
                                         style={{
                                             left: AT("--p"),
                                             top: `${GLAZING_BOX.top}%`,
                                             height: `${GLAZING_BOX.height}%`,
                                         }}
                                     >
-                                        <span className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#f4efe6]/70 bg-obsidian/50 backdrop-blur-sm">
+                                        <span className="absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-warm/70 bg-ink/50 backdrop-blur-sm">
                                             <svg
                                                 width="20"
                                                 height="10"
                                                 viewBox="0 0 20 10"
                                                 fill="none"
-                                                className="text-[#f4efe6]"
+                                                className="text-warm"
                                             >
                                                 <path
                                                     d="M6 1 1 5l5 4M14 1l5 4-5 4"
@@ -615,18 +615,18 @@ export default function HowSection() {
                             {/* Fixed UI: frame line, tonal grade, side tags, state label */}
                             <div
                                 aria-hidden
-                                className="pointer-events-none absolute inset-0 border border-silver/20 bg-gradient-to-t from-obsidian/35 via-transparent to-transparent"
+                                className="pointer-events-none absolute inset-0 border border-warm/20 bg-gradient-to-t from-ink/35 via-transparent to-transparent"
                             />
-                            <span className="pointer-events-none absolute left-3 top-3 bg-obsidian/55 px-2 py-1 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/90 backdrop-blur-sm">
+                            <span className="pointer-events-none absolute left-3 top-3 bg-ink/55 px-2 py-1 text-[10px] uppercase tracking-[.3em] text-warm/90 backdrop-blur-sm">
                                 Private
                             </span>
-                            <span className="pointer-events-none absolute right-3 top-3 bg-obsidian/55 px-2 py-1 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/90 backdrop-blur-sm">
+                            <span className="pointer-events-none absolute right-3 top-3 bg-ink/55 px-2 py-1 text-[10px] uppercase tracking-[.3em] text-warm/90 backdrop-blur-sm">
                                 Clear
                             </span>
-                            <div className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 border border-silver/25 bg-obsidian/60 px-3 py-2 text-[10px] uppercase tracking-[.3em] text-[#f4efe6] backdrop-blur-sm">
+                            <div className="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 border border-warm/25 bg-ink/60 px-3 py-2 text-[10px] uppercase tracking-[.3em] text-warm backdrop-blur-sm">
                                 <span
                                     aria-hidden
-                                    className="h-1.5 w-1.5 rounded-full bg-champagne"
+                                    className="h-1.5 w-1.5 rounded-full bg-mist"
                                 />
                                 <span ref={chipRef} role="status">
                                     Comparing
@@ -635,7 +635,7 @@ export default function HowSection() {
                         </div>
                     </div>
 
-                    <p className="mt-3 shrink-0 text-[11px] uppercase tracking-[.22em] text-silver/50">
+                    <p className="mt-3 shrink-0 text-[11px] uppercase tracking-[.22em] text-ink/70">
                         Illustrative demonstration · drag or use arrow keys to compare
                     </p>
                 </div>
@@ -644,10 +644,10 @@ export default function HowSection() {
                 <div className="lg:col-span-5 lg:row-start-2 lg:self-start">
                     <p
                         data-count-wrap
-                        className="invisible mb-4 hidden text-[11px] uppercase tracking-[.28em] text-silver/50 lg:block"
+                        className="invisible mb-4 hidden text-[11px] uppercase tracking-[.28em] text-ink/70 lg:block"
                     >
                         Step{" "}
-                        <span data-count className="text-champagne">
+                        <span data-count className="text-eucalyptus">
                             01
                         </span>{" "}
                         / 03
@@ -655,12 +655,12 @@ export default function HowSection() {
                     <div className="relative pl-8 md:pl-10">
                         <div
                             aria-hidden
-                            className="absolute bottom-1 left-0 top-1 w-px bg-silver/15"
+                            className="absolute bottom-1 left-0 top-1 w-px bg-line"
                         />
                         <div
                             data-bar
                             aria-hidden
-                            className="absolute bottom-1 left-0 top-1 w-px origin-top bg-champagne"
+                            className="absolute bottom-1 left-0 top-1 w-px origin-top bg-eucalyptus"
                         />
                         <ol data-steps className="group space-y-8 lg:space-y-5">
                             {STEPS.map(({ Icon, title, body }, i) => (
@@ -671,17 +671,17 @@ export default function HowSection() {
                                 >
                                     <div className="flex gap-4">
                                         <Icon
-                                            className="mt-1 h-5 w-5 shrink-0 text-champagne"
+                                            className="mt-1 h-5 w-5 shrink-0 text-eucalyptus"
                                             strokeWidth={1.25}
                                         />
                                         <div>
-                                            <span className="text-[11px] uppercase tracking-[.28em] text-champagne/80">
+                                            <span className="text-[11px] uppercase tracking-[.28em] text-eucalyptus/80">
                                                 Step 0{i + 1}
                                             </span>
-                                            <h3 className="display mt-1 text-xl leading-tight text-[#f4efe6] md:text-2xl lg:text-[1.35rem]">
+                                            <h3 className="display mt-1 text-xl leading-tight text-ink md:text-2xl lg:text-[1.35rem]">
                                                 {title}
                                             </h3>
-                                            <p className="mt-2 max-w-sm text-sm leading-relaxed text-silver/70 md:text-base lg:text-[.9rem] lg:leading-snug">
+                                            <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink/70 md:text-base lg:text-[.9rem] lg:leading-snug">
                                                 {body}
                                             </p>
                                         </div>

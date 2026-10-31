@@ -35,7 +35,7 @@ export default function Page() {
 
   return (
     <Motion>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-silver/10 bg-obsidian/75 px-5 py-4 text-silver backdrop-blur-md md:px-12 md:py-5">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-ivory/80 px-5 py-4 text-ink backdrop-blur-md md:px-12 md:py-5">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4">
 
           {/* LOGO */}
@@ -56,7 +56,7 @@ export default function Page() {
               <a
                 key={h}
                 href={h}
-                className="text-silver/80 transition hover:text-silver"
+                className="text-ink/80 transition hover:text-eucalyptus"
               >
                 {l}
               </a>
@@ -65,19 +65,19 @@ export default function Page() {
 
           {/* MOBILE NAVIGATION */}
           <details className="mobile-nav relative lg:hidden">
-            <summary className="cursor-pointer list-none rounded-full border border-silver/40 px-4 py-2 text-sm">
+            <summary className="cursor-pointer list-none rounded-full border border-eucalyptus/40 px-4 py-2 text-sm text-eucalyptus">
               Menu
             </summary>
 
             <nav
               aria-label="Primary"
-              className="absolute right-0 top-12 flex min-w-48 flex-col gap-4 border border-silver/20 bg-obsidian p-5 shadow-xl"
+              className="absolute right-0 top-12 flex min-w-48 flex-col gap-4 border border-line bg-warm p-5 shadow-xl"
             >
               {nav.map(([l, h]) => (
                 <a
                   key={h}
                   href={h}
-                  className="text-silver/85 transition hover:text-champagne"
+                  className="text-ink/85 transition hover:text-eucalyptus"
                 >
                   {l}
                 </a>
@@ -88,7 +88,7 @@ export default function Page() {
           {/* ENQUIRY BUTTON */}
           <a
             href="#enquiry"
-            className="shrink-0 rounded-full border border-champagne/70 px-5 py-2 text-sm text-silver transition hover:bg-champagne hover:text-obsidian"
+            className="shrink-0 rounded-full border border-eucalyptus/70 px-5 py-2 text-sm text-eucalyptus transition hover:bg-eucalyptus hover:text-warm"
           >
             Enquire
           </a>
@@ -111,7 +111,7 @@ export default function Page() {
             />
           </div>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-obsidian/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/50" />
 
           <div
             data-hero-frost
@@ -123,13 +123,13 @@ export default function Page() {
           <div
             data-hero-veil
             style={{ opacity: 0 }}
-            className="absolute inset-0 bg-obsidian"
+            className="absolute inset-0 bg-ink"
             aria-hidden
           />
 
           <div
             data-hero-copy
-            className="relative z-10 flex h-full flex-col justify-end px-6 pb-16 md:px-12 md:pb-20"
+            className="relative z-10 flex h-full flex-col justify-end px-6 pb-16 text-ivory md:px-12 md:pb-20"
           >
             <h1
               data-split
@@ -141,7 +141,7 @@ export default function Page() {
             <div className="mt-10 grid items-end gap-8 md:grid-cols-[1fr_auto]">
               <p
                 data-hero-in
-                className="max-w-md text-lg leading-relaxed text-silver/80"
+                className="max-w-md text-lg leading-relaxed text-warm/85"
               >
                 Smart film that turns the glass you already have from clear
                 to private, for Queensland homes and workplaces.
@@ -151,7 +151,7 @@ export default function Page() {
                 <a
                   data-magnetic
                   href="#enquiry"
-                  className={`${btn} bg-champagne text-obsidian hover:bg-silver`}
+                  className={`${btn} bg-eucalyptus text-warm ring-1 ring-mist/40 hover:bg-ink`}
                 >
                   Start a project enquiry
                   <ArrowUpRight className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default function Page() {
                 <button
                   data-toggle
                   aria-pressed="false"
-                  className={`${btn} border border-silver/40 backdrop-blur hover:bg-silver/10`}
+                  className={`${btn} border border-warm/50 text-warm backdrop-blur hover:bg-warm/10`}
                 >
                   <ToggleRight className="h-4 w-4" />
                   <span>Switch to private</span>
@@ -173,7 +173,7 @@ export default function Page() {
         {/* TICKER */}
         <section
           aria-label="Key benefits"
-          className="overflow-hidden border-y border-silver/15 bg-charcoal py-6"
+          className="overflow-hidden border-y border-line bg-limestone py-6"
         >
           <div
             className="marquee-track flex w-max"
@@ -191,10 +191,10 @@ export default function Page() {
                   return (
                     <li
                       key={t}
-                      className="display flex items-center gap-4 text-2xl text-silver/90 md:text-3xl"
+                      className="display flex items-center gap-4 text-2xl text-ink/90 md:text-3xl"
                     >
                       <I
-                        className="h-5 w-5 text-champagne"
+                        className="h-5 w-5 text-eucalyptus"
                         strokeWidth={1.25}
                       />
                       {t}
@@ -224,7 +224,7 @@ export default function Page() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-silver/15 px-6 py-12 md:px-12">
+      <footer className="border-t border-mist/20 bg-ink px-6 py-12 text-ivory md:px-12">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
 
           <div>
@@ -232,12 +232,12 @@ export default function Page() {
               {site.brand}
             </p>
 
-            <p className="mt-2 text-sm text-silver/60">
+            <p className="mt-2 text-sm text-warm/60">
               {site.product} for {site.region}
             </p>
 
             {c.abn && (
-              <p className="mt-1 text-sm text-silver/60">
+              <p className="mt-1 text-sm text-warm/60">
                 ABN {c.abn}
               </p>
             )}
@@ -246,7 +246,7 @@ export default function Page() {
           {/* FOOTER NAVIGATION */}
           <nav
             aria-label="Footer"
-            className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-silver/70"
+            className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-warm/70"
           >
             {[
               ...nav,
@@ -255,7 +255,7 @@ export default function Page() {
               <a
                 key={h}
                 href={h}
-                className="transition hover:text-silver"
+                className="transition hover:text-ivory"
               >
                 {l}
               </a>
@@ -263,7 +263,7 @@ export default function Page() {
           </nav>
         </div>
 
-        <p className="mt-10 text-xs text-silver/40">
+        <p className="mt-10 text-xs text-warm/50">
           © {new Date().getFullYear()} {site.brand}. All rights reserved.
         </p>
       </footer>

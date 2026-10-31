@@ -142,7 +142,7 @@ export default function SpacesSection() {
                         // Headline eases out of focus as the gallery takes over
                         gsap.to(q("[data-intro-drift]"), {
                             yPercent: -10 * k,
-                            opacity: 0.18,
+                            opacity: 0.35,
                             ease: "none",
                             scrollTrigger: { trigger: intro, start: "top 20%", end: "bottom top", scrub: true },
                         });
@@ -187,9 +187,10 @@ export default function SpacesSection() {
                     });
 
                     /* ---------- Background layers: slower than the photographs ---------- */
+                    const whole = { trigger: el, start: "top bottom", end: "bottom top", scrub: true };
+                    const kx = desktop ? 1 : tablet ? 0.8 : 0.6; // sideways travel of the big background word
+                    gsap.fromTo(q("[data-bgtype]"), { xPercent: 20 }, { xPercent: -55 * kx, ease: "none", scrollTrigger: whole });
                     if (k > 0) {
-                        const whole = { trigger: el, start: "top bottom", end: "bottom top", scrub: true };
-                        gsap.fromTo(q("[data-bgtype]"), { yPercent: -4 }, { yPercent: 10, ease: "none", scrollTrigger: whole });
                         gsap.fromTo(q("[data-hairline]"), { y: -30 * k }, { y: 30 * k, ease: "none", scrollTrigger: whole });
                     }
 
@@ -213,11 +214,11 @@ export default function SpacesSection() {
             {/* Decorative background (slow independent drift) */}
             <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
                 <div data-bgtype className="absolute right-0 top-[18%] will-change-transform">
-                    <p className="display whitespace-nowrap text-[26vw] leading-none text-silver/[.025]">Spaces</p>
+                    <p className="display whitespace-nowrap text-[26vw] leading-none text-ink/[.05]">Spaces</p>
                 </div>
                 <div
                     data-hairline
-                    className="absolute bottom-24 left-6 top-40 w-px bg-gradient-to-b from-transparent via-silver/20 to-transparent will-change-transform md:left-12"
+                    className="absolute bottom-24 left-6 top-40 w-px bg-gradient-to-b from-transparent via-line to-transparent will-change-transform md:left-12"
                 />
             </div>
 
@@ -227,12 +228,12 @@ export default function SpacesSection() {
                     <div className="lg:col-span-9">
                         <p
                             data-eyebrow
-                            className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-champagne"
+                            className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus"
                         >
                             <span>Designed for different spaces</span>
                         </p>
                         <div data-intro-drift className="will-change-transform">
-                            <h2 className="display mt-8 text-[clamp(3rem,9vw,8.5rem)] leading-[.98] tracking-[-0.015em] text-[#f4efe6]">
+                            <h2 className="display mt-8 text-[clamp(3rem,9vw,8.5rem)] leading-[.98] tracking-[-0.015em] text-ink">
                                 <span className="block overflow-hidden pb-[.08em]">
                                     <span data-line className="block">One film.</span>
                                 </span>
@@ -240,18 +241,18 @@ export default function SpacesSection() {
                                     <span data-line className="block">Five kinds</span>
                                 </span>
                                 <span className="block overflow-hidden pb-[.08em]">
-                                    <span data-line className="block italic text-[#f4efe6]/85">of space.</span>
+                                    <span data-line className="block italic text-ink">of space.</span>
                                 </span>
                             </h2>
                         </div>
                     </div>
                     <div className="lg:col-span-4 lg:col-start-9 lg:self-end">
-                        <p data-intro-p className="max-w-sm leading-relaxed text-silver/70">
+                        <p data-intro-p className="max-w-sm leading-relaxed text-ink/70">
                             Switchable smart film can be considered for suitable existing glass across homes, workplaces and
                             public-facing spaces. Each project begins with an assessment of the glazing already in place.
                         </p>
                     </div>
-                    <div data-rule aria-hidden className="h-px w-full bg-silver/25 lg:col-span-12" />
+                    <div data-rule aria-hidden className="h-px w-full bg-line lg:col-span-12" />
                 </div>
 
                 {/* ---------- Gallery ---------- */}
@@ -259,7 +260,7 @@ export default function SpacesSection() {
                     {ITEMS.map((it) => (
                         <article key={it.title} data-item data-dir={it.dir} data-amp={it.amp} className={`group relative ${it.wrap}`}>
                             {/* frame (clip reveal) > par (parallax) > enter (scale) > hover (CSS) > Media */}
-                            <div data-frame className={`relative w-full overflow-hidden border border-silver/15 ${it.aspect}`}>
+                            <div data-frame className={`relative w-full overflow-hidden border border-line ${it.aspect}`}>
                                 <div data-par className="absolute inset-x-0 -inset-y-[8%] will-change-transform">
                                     <div data-enter className="h-full w-full will-change-transform">
                                         <div className="h-full w-full saturate-[.94] transition-[transform,filter] duration-700 ease-out [@media(hover:hover)]:group-hover:scale-[1.04] [@media(hover:hover)]:group-hover:saturate-100 [@media(hover:hover)]:group-hover:brightness-[1.06]">
@@ -269,22 +270,22 @@ export default function SpacesSection() {
                                 </div>
                                 <div
                                     aria-hidden
-                                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/25 via-transparent to-transparent"
+                                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent"
                                 />
                             </div>
 
                             {/* Caption: consistent alignment regardless of image proportion */}
-                            <div className="mt-6 border-t border-silver/20 pt-5">
-                                <div data-cap className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-champagne">
+                            <div className="mt-6 border-t border-line pt-5">
+                                <div data-cap className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
                                     <span>{it.n}</span>
                                     <span
                                         aria-hidden
-                                        className="h-px w-8 bg-champagne/60 transition-[width] duration-500 ease-out [@media(hover:hover)]:group-hover:w-14"
+                                        className="h-px w-8 bg-eucalyptus/60 transition-[width] duration-500 ease-out [@media(hover:hover)]:group-hover:w-14"
                                     />
-                                    <span className="text-silver/45">/ 05</span>
+                                    <span className="text-ink/70">/ 05</span>
                                 </div>
-                                <h3 data-cap className="display mt-4 text-3xl text-[#f4efe6] md:text-4xl">{it.title}</h3>
-                                <p data-cap className="mt-2 max-w-xs text-silver/65">{it.desc}</p>
+                                <h3 data-cap className="display mt-4 text-3xl text-ink md:text-4xl">{it.title}</h3>
+                                <p data-cap className="mt-2 max-w-xs text-ink/70">{it.desc}</p>
                             </div>
                         </article>
                     ))}
@@ -293,17 +294,17 @@ export default function SpacesSection() {
                 {/* ---------- Closing line into the next section ---------- */}
                 <div
                     data-end
-                    className="mt-24 flex flex-col gap-6 border-t border-silver/20 pt-8 md:flex-row md:items-center md:justify-between lg:mt-32"
+                    className="mt-24 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-center md:justify-between lg:mt-32"
                 >
-                    <p className="max-w-md text-sm leading-relaxed text-silver/60">
+                    <p className="max-w-md text-sm leading-relaxed text-ink/70">
                         Suitability depends on your existing glass, so every project starts with an assessment.
                     </p>
                     <a
                         href="#enquiry"
-                        className="group/cta inline-flex items-center gap-3 self-start border-b border-champagne/40 pb-2 text-sm uppercase tracking-[.2em] text-[#f4efe6] transition-colors duration-500 hover:border-champagne md:self-auto"
+                        className="group/cta inline-flex items-center gap-3 self-start border-b border-eucalyptus/40 pb-2 text-sm uppercase tracking-[.2em] text-ink transition-colors duration-500 hover:border-eucalyptus md:self-auto"
                     >
                         Start with an assessment
-                        <ArrowUpRight className="h-4 w-4 text-champagne transition-transform duration-500 group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" />
+                        <ArrowUpRight className="h-4 w-4 text-eucalyptus transition-transform duration-500 group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" />
                     </a>
                 </div>
             </div>

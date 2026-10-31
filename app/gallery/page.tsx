@@ -412,15 +412,15 @@ export default function GalleryPage() {
   };
 
   return (
-    <main ref={root} className="relative min-h-screen overflow-x-clip bg-obsidian text-silver">
+    <main ref={root} className="relative min-h-screen overflow-x-clip bg-ivory text-ink">
       {SHOW_BAR && (
-        <div className="fixed inset-x-0 top-0 z-40 flex items-center justify-between bg-gradient-to-b from-obsidian/80 to-transparent px-6 py-5 md:px-12">
-          <Link href="/" className="display text-xl tracking-[.08em] text-[#f4efe6]" aria-label="Clarivo home">
+        <div className="fixed inset-x-0 top-0 z-40 flex items-center justify-between bg-gradient-to-b from-ivory/90 to-transparent px-6 py-5 md:px-12">
+          <Link href="/" className="display text-xl tracking-[.08em] text-ink" aria-label="Clarivo home">
             {site.brand}
           </Link>
           <Link
             href="/#enquiry"
-            className="rounded-full border border-champagne/70 px-5 py-2 text-sm text-[#f4efe6] transition hover:bg-champagne hover:text-obsidian"
+            className="rounded-full border border-eucalyptus/70 px-5 py-2 text-sm text-eucalyptus transition hover:bg-eucalyptus hover:text-warm"
           >
             Enquire
           </Link>
@@ -431,11 +431,11 @@ export default function GalleryPage() {
       <header data-hero className="relative overflow-hidden px-6 pb-14 pt-28 md:px-12 lg:min-h-[100svh] lg:pb-16">
         <div className="relative z-10 flex flex-col lg:min-h-[calc(100svh-11rem)] lg:justify-between">
           <div data-h-drift className="will-change-transform">
-            <p data-h-eyebrow className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-champagne">
+            <p data-h-eyebrow className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
               <span>The Clarivo Collection</span>
-              <span aria-hidden className="h-px w-10 bg-champagne/60" />
+              <span aria-hidden className="h-px w-10 bg-eucalyptus/60" />
             </p>
-            <h1 className="display mt-8 text-[clamp(3rem,9.2vw,9.5rem)] leading-[.96] tracking-[-0.02em] text-[#f4efe6]">
+            <h1 className="display mt-8 text-[clamp(3rem,9.2vw,9.5rem)] leading-[.96] tracking-[-0.02em] text-ink">
               <span className="block overflow-hidden pb-[.08em]">
                 <span data-h-line className="block">Spaces,</span>
               </span>
@@ -449,14 +449,14 @@ export default function GalleryPage() {
           </div>
 
           <div className="mt-8 flex items-end justify-between gap-8 lg:mt-12">
-            <p data-h-fade className="max-w-sm leading-relaxed text-silver/70">
+            <p data-h-fade className="max-w-sm leading-relaxed text-ink/70">
               An exhibition of the residential and commercial environments where switchable smart film can be
               considered for suitable existing glass. Imagery is illustrative of these kinds of space.
             </p>
-            <div data-h-cue data-h-fade className="hidden shrink-0 items-center gap-4 text-[11px] uppercase tracking-[.28em] text-silver/60 lg:flex">
+            <div data-h-cue data-h-fade className="hidden shrink-0 items-center gap-4 text-[11px] uppercase tracking-[.28em] text-ink/70 lg:flex">
               <span>Scroll</span>
-              <span aria-hidden className="relative block h-12 w-px overflow-hidden bg-silver/15">
-                <span data-cue-line className="absolute inset-0 origin-top bg-champagne" />
+              <span aria-hidden className="relative block h-12 w-px overflow-hidden bg-line">
+                <span data-cue-line className="absolute inset-0 origin-top bg-eucalyptus" />
               </span>
             </div>
           </div>
@@ -474,7 +474,7 @@ export default function GalleryPage() {
           </div>
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-obsidian lg:via-obsidian/45 lg:to-transparent"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-ivory lg:via-ivory/45 lg:to-transparent"
           />
         </div>
       </header>
@@ -484,11 +484,11 @@ export default function GalleryPage() {
         <div className="mx-auto max-w-[1800px]">
           {/* Index + editorial filter */}
           <div data-index className="relative pt-7">
-            <div data-i-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-silver/20" />
+            <div data-i-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-line" />
             <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p data-i-fade className="text-[11px] uppercase tracking-[.28em] text-champagne">Index of spaces</p>
-                <h2 data-i-fade id="gallery-title" className="display mt-4 text-[clamp(2rem,4vw,3.5rem)] leading-tight text-[#f4efe6]">
+                <p data-i-fade className="text-[11px] uppercase tracking-[.28em] text-eucalyptus">Index of spaces</p>
+                <h2 data-i-fade id="gallery-title" className="display mt-4 text-[clamp(2rem,4vw,3.5rem)] leading-tight text-ink">
                   Selected spaces
                 </h2>
               </div>
@@ -502,14 +502,14 @@ export default function GalleryPage() {
                       type="button"
                       aria-pressed={active}
                       onClick={() => setFilter(cat)}
-                      className={`group/f relative flex min-h-11 items-center gap-2 text-[11px] uppercase tracking-[.24em] transition-colors duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne ${active ? "text-[#f4efe6]" : "text-silver/50 hover:text-[#f4efe6]"
+                      className={`group/f relative flex min-h-11 items-center gap-2 text-[11px] uppercase tracking-[.24em] transition-colors duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-eucalyptus ${active ? "text-ink" : "text-ink/70 hover:text-ink"
                         }`}
                     >
                       {cat}
-                      <sup className="text-[9px] tracking-normal text-champagne">{pad(count)}</sup>
+                      <sup className="text-[9px] tracking-normal text-eucalyptus">{pad(count)}</sup>
                       <span
                         aria-hidden
-                        className={`absolute inset-x-0 bottom-1.5 h-px origin-left bg-champagne transition-transform duration-500 ${active ? "scale-x-100" : "scale-x-0 group-hover/f:scale-x-50"
+                        className={`absolute inset-x-0 bottom-1.5 h-px origin-left bg-eucalyptus transition-transform duration-500 ${active ? "scale-x-100" : "scale-x-0 group-hover/f:scale-x-50"
                           }`}
                       />
                     </button>
@@ -540,12 +540,12 @@ export default function GalleryPage() {
                     tabIndex={dim ? -1 : 0}
                     onClick={(e) => openAt(it.key, e)}
                     aria-label={`View larger: ${it.title}, ${it.cat}`}
-                    className="relative block w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+                    className="relative block w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-eucalyptus"
                   >
                     {/* frame (clip reveal) > par (parallax) > enter (scale) > hover (CSS) > Media */}
                     <div
                       data-frame
-                      className={`relative w-full overflow-hidden border-silver/15 ${it.bleed ? "border-y" : "border"} ${it.aspect}`}
+                      className={`relative w-full overflow-hidden border-line ${it.bleed ? "border-y" : "border"} ${it.aspect}`}
                     >
                       <div data-par className="absolute inset-x-0 -inset-y-[8%] will-change-transform">
                         <div data-enter className="h-full w-full will-change-transform">
@@ -554,38 +554,38 @@ export default function GalleryPage() {
                           </div>
                         </div>
                       </div>
-                      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/30 via-transparent to-transparent" />
+                      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" />
                       <span
                         aria-hidden
-                        className="pointer-events-none absolute left-4 top-4 text-[10px] uppercase tracking-[.3em] text-[#f4efe6]/85"
+                        className="pointer-events-none absolute left-4 top-4 text-[10px] uppercase tracking-[.3em] text-warm/90"
                       >
                         {pad(n + 1)}
                       </span>
                       <span
                         aria-hidden
-                        className="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-3 text-[10px] uppercase tracking-[.3em] text-[#f4efe6] opacity-0 transition-opacity duration-500 [@media(hover:hover)]:flex [@media(hover:hover)]:group-hover:opacity-100"
+                        className="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-3 text-[10px] uppercase tracking-[.3em] text-warm opacity-0 transition-opacity duration-500 [@media(hover:hover)]:flex [@media(hover:hover)]:group-hover:opacity-100"
                       >
                         View
-                        <span className="h-px w-8 bg-champagne" />
+                        <span className="h-px w-8 bg-warm" />
                       </span>
                     </div>
                   </button>
 
                   {/* Caption: same structure for every image */}
-                  <div className={`mt-5 border-t border-silver/20 pt-5 ${it.bleed ? "px-6 md:px-12" : ""}`}>
+                  <div className={`mt-5 border-t border-line pt-5 ${it.bleed ? "px-6 md:px-12" : ""}`}>
                     <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                       <div>
-                        <div data-cap className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-champagne">
+                        <div data-cap className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
                           <span>{pad(n + 1)}</span>
                           <span
                             aria-hidden
-                            className="h-px w-8 bg-champagne/60 transition-[width] duration-500 ease-out [@media(hover:hover)]:group-hover:w-14"
+                            className="h-px w-8 bg-eucalyptus/60 transition-[width] duration-500 ease-out [@media(hover:hover)]:group-hover:w-14"
                           />
-                          <span className="text-silver/55">{it.cat}</span>
+                          <span className="text-ink/70">{it.cat}</span>
                         </div>
-                        <h3 data-cap className="display mt-4 text-3xl leading-tight text-[#f4efe6] md:text-4xl">{it.title}</h3>
+                        <h3 data-cap className="display mt-4 text-3xl leading-tight text-ink md:text-4xl">{it.title}</h3>
                       </div>
-                      <p data-cap className="max-w-xs text-sm leading-relaxed text-silver/65 md:mt-9">{it.caption}</p>
+                      <p data-cap className="max-w-xs text-sm leading-relaxed text-ink/70 md:mt-9">{it.caption}</p>
                     </div>
                   </div>
                 </article>
@@ -596,35 +596,35 @@ export default function GalleryPage() {
       </section>
 
       {/* ================= D. CLOSING ================= */}
-      <section data-close className="relative overflow-hidden px-6 py-32 md:px-12 md:py-48">
+      <section data-close className="relative overflow-hidden bg-eucalyptus px-6 py-32 text-ivory md:px-12 md:py-48">
         <div
           data-c-hair
           aria-hidden
-          className="pointer-events-none absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-transparent via-silver/20 to-transparent will-change-transform md:left-12"
+          className="pointer-events-none absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-transparent via-mist/40 to-transparent will-change-transform md:left-12"
         />
         <div className="relative mx-auto max-w-[1800px]">
-          <p data-c-fade className="text-[11px] uppercase tracking-[.28em] text-champagne">Start a project</p>
-          <h2 className="display mt-8 text-[clamp(3rem,10vw,9.5rem)] leading-[.98] tracking-[-0.02em] text-[#f4efe6]">
+          <p data-c-fade className="text-[11px] uppercase tracking-[.28em] text-mist">Start a project</p>
+          <h2 className="display mt-8 text-[clamp(3rem,10vw,9.5rem)] leading-[.98] tracking-[-0.02em] text-ivory">
             <span className="block overflow-hidden pb-[.08em]">
               <span data-c-line className="block">Your space</span>
             </span>
             <span className="block overflow-hidden pb-[.08em]">
-              <span data-c-line className="block italic text-[#f4efe6]/85">could be next.</span>
+              <span data-c-line className="block italic text-ivory/85">could be next.</span>
             </span>
           </h2>
-          <div data-c-rule aria-hidden className="mt-14 h-px w-full bg-silver/20 md:mt-20" />
+          <div data-c-rule aria-hidden className="mt-14 h-px w-full bg-ivory/20 md:mt-20" />
           <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <p data-c-fade className="max-w-md leading-relaxed text-silver/70">
+            <p data-c-fade className="max-w-md leading-relaxed text-warm/70">
               Tell us about the glass you already have. We will assess its suitability and talk through the next steps
               for your project.
             </p>
             <Link
               data-c-fade
               href="/#enquiry"
-              className="group/cta inline-flex items-center gap-4 self-start border-b border-champagne/40 pb-2 text-sm uppercase tracking-[.2em] text-[#f4efe6] transition-colors duration-500 hover:border-champagne md:self-auto"
+              className="group/cta inline-flex items-center gap-4 self-start border-b border-mist/40 pb-2 text-sm uppercase tracking-[.2em] text-ivory transition-colors duration-500 hover:border-mist md:self-auto"
             >
               Discuss your project
-              <ArrowUpRight className="h-4 w-4 text-champagne transition-transform duration-500 group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" />
+              <ArrowUpRight className="h-4 w-4 text-mist transition-transform duration-500 group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5" />
             </Link>
           </div>
         </div>
@@ -634,7 +634,7 @@ export default function GalleryPage() {
       {isOpen && current && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] bg-ink/95 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) close();
           }}
@@ -649,15 +649,15 @@ export default function GalleryPage() {
               if (e.target === e.currentTarget) close();
             }}
           >
-            <div data-vui className="flex items-center justify-between text-[11px] uppercase tracking-[.28em] text-silver/60">
+            <div data-vui className="flex items-center justify-between text-[11px] uppercase tracking-[.28em] text-warm/60">
               <span>
-                <span className="text-champagne">{pad((open ?? 0) + 1)}</span> / {pad(visible.length)}
+                <span className="text-mist">{pad((open ?? 0) + 1)}</span> / {pad(visible.length)}
               </span>
               <button
                 ref={closeRef}
                 type="button"
                 onClick={close}
-                className="flex min-h-11 items-center gap-3 px-1 text-[#f4efe6] transition-colors hover:text-champagne focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+                className="flex min-h-11 items-center gap-3 px-1 text-ivory transition-colors hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mist"
               >
                 Close
                 <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -674,7 +674,7 @@ export default function GalleryPage() {
                 if (e.target === e.currentTarget) close();
               }}
             >
-              <div ref={stageRef} className="overflow-hidden border border-silver/15">
+              <div ref={stageRef} className="overflow-hidden border border-warm/15">
                 <div
                   ref={imgRef}
                   className="relative"
@@ -693,9 +693,9 @@ export default function GalleryPage() {
 
             <div data-vui className="flex items-end justify-between gap-6">
               <div className="min-w-0">
-                <p className="text-[11px] uppercase tracking-[.28em] text-champagne">{current.cat}</p>
-                <p className="display mt-2 text-2xl text-[#f4efe6] md:text-3xl">{current.title}</p>
-                <p className="mt-2 hidden max-w-md text-sm text-silver/65 md:block">{current.caption}</p>
+                <p className="text-[11px] uppercase tracking-[.28em] text-mist">{current.cat}</p>
+                <p className="display mt-2 text-2xl text-ivory md:text-3xl">{current.title}</p>
+                <p className="mt-2 hidden max-w-md text-sm text-warm/65 md:block">{current.caption}</p>
               </div>
               {visible.length > 1 && (
                 <div className="flex shrink-0 items-center gap-3">
@@ -703,7 +703,7 @@ export default function GalleryPage() {
                     type="button"
                     onClick={() => go(-1)}
                     aria-label="Previous image"
-                    className="grid h-12 w-12 place-items-center border border-silver/30 text-[#f4efe6] transition-colors hover:border-champagne hover:text-champagne focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+                    className="grid h-12 w-12 place-items-center border border-warm/30 text-ivory transition-colors hover:border-mist hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mist"
                   >
                     <svg aria-hidden width="20" height="10" viewBox="0 0 20 10" fill="none">
                       <path d="M20 5H1M5 1 1 5l4 4" stroke="currentColor" strokeWidth="1" />
@@ -713,7 +713,7 @@ export default function GalleryPage() {
                     type="button"
                     onClick={() => go(1)}
                     aria-label="Next image"
-                    className="grid h-12 w-12 place-items-center border border-silver/30 text-[#f4efe6] transition-colors hover:border-champagne hover:text-champagne focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+                    className="grid h-12 w-12 place-items-center border border-warm/30 text-ivory transition-colors hover:border-mist hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mist"
                   >
                     <svg aria-hidden width="20" height="10" viewBox="0 0 20 10" fill="none">
                       <path d="M0 5h19M15 1l4 4-4 4" stroke="currentColor" strokeWidth="1" />

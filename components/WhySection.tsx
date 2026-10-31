@@ -14,13 +14,13 @@ const reasons: [string, string][] = [
 
 export default function WhySection() {
     return (
-        <section id="why" className="relative bg-silver px-6 py-28 text-obsidian md:px-12 md:py-40 lg:py-48">
+        <section id="why" className="relative bg-eucalyptus px-6 py-28 text-ivory md:px-12 md:py-40 lg:py-48">
             <div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-12 lg:gap-x-10">
                 {/* Heading column */}
                 <div className="lg:col-span-6 lg:self-start">
-                    <p className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-obsidian/60">
+                    <p className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-mist">
                         <span>Why Clarivo</span>
-                        <span aria-hidden className="h-px w-10 bg-obsidian/30" />
+                        <span aria-hidden className="h-px w-10 bg-mist/50" />
                     </p>
                     <h2
                         data-split
@@ -36,16 +36,16 @@ export default function WhySection() {
                         <div
                             data-reveal
                             key={t}
-                            className="relative pb-10 pt-7 last:border-b last:border-obsidian/25 md:pb-12"
+                            className="relative pb-10 pt-7 last:border-b last:border-ivory/20 md:pb-12"
                         >
-                            <div data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-obsidian/25" />
+                            <div data-rule aria-hidden className="absolute inset-x-0 top-0 h-px bg-ivory/20" />
                             <dt className="flex items-baseline gap-5">
-                                <span aria-hidden className="w-8 shrink-0 text-[11px] tracking-[.28em] text-obsidian/60">
+                                <span aria-hidden className="w-8 shrink-0 text-[11px] tracking-[.28em] text-mist">
                                     0{i + 1}
                                 </span>
                                 <span className="display text-[1.7rem] leading-tight md:text-3xl">{t}</span>
                             </dt>
-                            <dd className="mt-4 max-w-md text-[.95rem] leading-relaxed text-obsidian/70 pl-[3.25rem]">{d}</dd>
+                            <dd className="mt-4 max-w-md text-[.95rem] leading-relaxed text-warm/70 pl-[3.25rem]">{d}</dd>
                         </div>
                     ))}
                 </dl>

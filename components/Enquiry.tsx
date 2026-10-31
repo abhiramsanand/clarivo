@@ -15,7 +15,7 @@ export function validate(f: F) {
   if (!f.consent) e.consent = "Please confirm we may contact you.";
   return e;
 }
-const field = "w-full border-0 border-b border-silver/25 bg-transparent py-3 text-silver placeholder:text-silver/40 focus:border-champagne focus:outline-none focus:ring-0";
+const field = "w-full border-0 border-b border-muted bg-warm py-3 text-ink placeholder:text-muted focus:border-eucalyptus focus:outline-none focus:ring-0";
 
 export default function Enquiry() {
   const [f, setF] = useState<F>(empty);
@@ -33,28 +33,28 @@ export default function Enquiry() {
     } catch { setState("fail"); }
   }
   if (state === "ok") return (
-    <div role="status" className="border border-champagne/40 p-10"><CheckCircle2 className="mb-4 text-champagne" />
-      <p className="display text-3xl">Thanks, your enquiry is in.</p><p className="mt-3 text-silver/70">We will reply about your glass and next steps.</p>
-      <button className="mt-6 text-sm text-glacier underline underline-offset-4" onClick={() => setState("idle")}>Send another enquiry</button></div>);
-  const Err = ({ k }: { k: keyof F }) => err[k] ? <p id={`${k}-e`} className="mt-1 text-sm text-[#f2a58e]">{err[k]}</p> : null;
+    <div role="status" className="border border-eucalyptus/40 p-10"><CheckCircle2 className="mb-4 text-eucalyptus" />
+      <p className="display text-3xl">Thanks, your enquiry is in.</p><p className="mt-3 text-ink/70">We will reply about your glass and next steps.</p>
+      <button className="mt-6 text-sm text-eucalyptus underline underline-offset-4" onClick={() => setState("idle")}>Send another enquiry</button></div>);
+  const Err = ({ k }: { k: keyof F }) => err[k] ? <p id={`${k}-e`} className="mt-1 text-sm text-[#9A3B2C]">{err[k]}</p> : null;
   const a = (k: keyof F) => ({ "aria-invalid": !!err[k], "aria-describedby": err[k] ? `${k}-e` : undefined });
   return (
     <form onSubmit={submit} noValidate className="grid gap-x-10 gap-y-7 md:grid-cols-2">
-      <label className="block"><span className="text-sm text-silver/70">Name</span><input className={field} autoComplete="name" value={f.name} onChange={(e) => set("name", e.target.value)} {...a("name")} /><Err k="name" /></label>
-      <label className="block"><span className="text-sm text-silver/70">Email</span><input type="email" className={field} autoComplete="email" value={f.email} onChange={(e) => set("email", e.target.value)} {...a("email")} /><Err k="email" /></label>
-      <label className="block"><span className="text-sm text-silver/70">Phone (optional)</span><input type="tel" className={field} autoComplete="tel" value={f.phone} onChange={(e) => set("phone", e.target.value)} {...a("phone")} /><Err k="phone" /></label>
-      <label className="block"><span className="text-sm text-silver/70">Suburb or town</span><input className={field} autoComplete="address-level2" value={f.suburb} onChange={(e) => set("suburb", e.target.value)} {...a("suburb")} /><Err k="suburb" /></label>
-      <label className="block md:col-span-2"><span className="text-sm text-silver/70">Space</span>
-        <select className={`${field} bg-obsidian text-silver`} value={f.type} onChange={(e) => set("type", e.target.value)} {...a("type")}>
-          <option className="bg-silver text-obsidian" value="">Select</option>{["Home", "Office", "Boardroom", "Hospitality", "Other commercial"].map((o) => <option className="bg-silver text-obsidian" key={o}>{o}</option>)}</select><Err k="type" /></label>
-      <label className="block md:col-span-2"><span className="text-sm text-silver/70">Tell us about the glass: windows or doors, rough sizes, glass type if known</span>
+      <label className="block"><span className="text-sm text-ink/70">Name</span><input className={field} autoComplete="name" value={f.name} onChange={(e) => set("name", e.target.value)} {...a("name")} /><Err k="name" /></label>
+      <label className="block"><span className="text-sm text-ink/70">Email</span><input type="email" className={field} autoComplete="email" value={f.email} onChange={(e) => set("email", e.target.value)} {...a("email")} /><Err k="email" /></label>
+      <label className="block"><span className="text-sm text-ink/70">Phone (optional)</span><input type="tel" className={field} autoComplete="tel" value={f.phone} onChange={(e) => set("phone", e.target.value)} {...a("phone")} /><Err k="phone" /></label>
+      <label className="block"><span className="text-sm text-ink/70">Suburb or town</span><input className={field} autoComplete="address-level2" value={f.suburb} onChange={(e) => set("suburb", e.target.value)} {...a("suburb")} /><Err k="suburb" /></label>
+      <label className="block md:col-span-2"><span className="text-sm text-ink/70">Space</span>
+        <select className={`${field} bg-warm text-ink`} value={f.type} onChange={(e) => set("type", e.target.value)} {...a("type")}>
+          <option className="bg-warm text-ink" value="">Select</option>{["Home", "Office", "Boardroom", "Hospitality", "Other commercial"].map((o) => <option className="bg-warm text-ink" key={o}>{o}</option>)}</select><Err k="type" /></label>
+      <label className="block md:col-span-2"><span className="text-sm text-ink/70">Tell us about the glass: windows or doors, rough sizes, glass type if known</span>
         <textarea rows={4} className={field} value={f.message} onChange={(e) => set("message", e.target.value)} {...a("message")} /><Err k="message" /></label>
       <input tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={f.website} onChange={(e) => set("website", e.target.value)} />
-      <div className="md:col-span-2"><label className="flex items-start gap-3 text-sm text-silver/70"><input type="checkbox" className="mt-1 accent-[#d6b98a]" checked={f.consent} onChange={(e) => set("consent", e.target.checked)} {...a("consent")} />I agree to be contacted about this enquiry.</label><Err k="consent" /></div>
+      <div className="md:col-span-2"><label className="flex items-start gap-3 text-sm text-ink/70"><input type="checkbox" className="mt-1 accent-eucalyptus" checked={f.consent} onChange={(e) => set("consent", e.target.checked)} {...a("consent")} />I agree to be contacted about this enquiry.</label><Err k="consent" /></div>
       <div className="flex flex-wrap items-center gap-6 md:col-span-2">
-        <button data-magnetic disabled={state === "sending"} className="inline-flex items-center gap-2 rounded-full bg-champagne px-8 py-4 font-medium text-obsidian transition hover:bg-silver disabled:opacity-60">
+        <button data-magnetic disabled={state === "sending"} className="inline-flex items-center gap-2 rounded-full bg-eucalyptus px-8 py-4 font-medium text-warm transition hover:bg-ink disabled:opacity-60">
           {state === "sending" && <Loader2 className="h-4 w-4 animate-spin" />}{state === "sending" ? "Sending" : "Send enquiry"}</button>
-        {state === "fail" && <p role="alert" className="flex items-center gap-2 text-sm text-[#f2a58e]"><AlertCircle className="h-4 w-4" />That did not send. Check your connection and try again.</p>}
+        {state === "fail" && <p role="alert" className="flex items-center gap-2 text-sm text-[#9A3B2C]"><AlertCircle className="h-4 w-4" />That did not send. Check your connection and try again.</p>}
       </div>
     </form>
   );
