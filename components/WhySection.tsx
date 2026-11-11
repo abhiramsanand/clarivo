@@ -1,7 +1,7 @@
 import WhyRules from "@/components/WhyRules";
 
 /**
- * CLARIVO — #why section (server component, no client state).
+ * PRIVOLUX — #why section (server component, no client state).
  * Heading uses the existing `data-split`; each row uses the existing `data-reveal`.
  * Top-rule drawing is handled by the tiny <WhyRules /> helper via `data-rule`.
  */
@@ -19,7 +19,7 @@ export default function WhySection() {
                 {/* Heading column */}
                 <div className="lg:col-span-6 lg:self-start">
                     <p className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-mist">
-                        <span>Why Clarivo</span>
+                        <span>Why Privolux</span>
                         <span aria-hidden className="h-px w-10 bg-mist/50" />
                     </p>
                     <h2

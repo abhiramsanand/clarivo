@@ -1,6 +1,6 @@
 // Edit this file to update brand, contact details, imagery and confirmed claims.
 export const site = {
-  brand: "CLARIVO™",
+  brand: "PRIVOLUX™",
   product: "Smart Film",
   region: "Queensland, Australia",
   contact: { email: "", phone: "", address: "", abn: "" },
@@ -9,9 +9,9 @@ export const site = {
     hero: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=75",
     showcase: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=75",
     // Local assets for the #how glass demonstration (built by scripts/build-glass-assets.py).
-    howRoom: "/images/clarivo-living-room.jpg",
-    howGlassMask: "/images/clarivo-glass-mask.png",
-    howGlassFrost: "/images/clarivo-glass-frost.jpg",
+    howRoom: "/images/privolux-living-room.jpg",
+    howGlassMask: "/images/privolux-glass-mask.png",
+    howGlassFrost: "/images/privolux-glass-frost.jpg",
     residential: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=75",
     office: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=75",
     boardroom: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=75",

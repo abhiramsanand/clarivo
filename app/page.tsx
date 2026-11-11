@@ -21,7 +21,7 @@ const nav = [
   ["Product", "#product"],
   ["How it works", "#how"],
   ["Spaces", "#spaces"],
-  ["Why Clarivo", "#why"],
+  ["Why Privolux", "#why"],
   ["Gallery", "/gallery"],
 ];
 
@@ -42,7 +42,7 @@ export default function Page() {
           <a
             href="#top"
             className="display shrink-0 text-xl tracking-[.08em]"
-            aria-label="Clarivo home"
+            aria-label="Privolux home"
           >
             {site.brand}
           </a>
@@ -215,7 +215,7 @@ export default function Page() {
         {/* SPACES */}
         <SpacesSection />
 
-        {/* WHY CLARIVO */}
+        {/* WHY PRIVOLUX */}
         <WhySection />
 
         {/* ENQUIRY */}

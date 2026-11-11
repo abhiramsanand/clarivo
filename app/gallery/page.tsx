@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * CLARIVO — Gallery route (app/gallery/page.tsx)
+ * PRIVOLUX — Gallery route (app/gallery/page.tsx)
  * Single file. No new components, dependencies, CSS or config.
  *
  * Assumptions (adjust at the top of the file if needed):
@@ -436,7 +436,7 @@ export default function GalleryPage() {
         <div className="relative z-10 flex flex-col lg:min-h-[calc(100svh-11rem)] lg:justify-between">
           <div data-h-drift className="will-change-transform">
             <p data-h-eyebrow className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
-              <span>The Clarivo Collection</span>
+              <span>The Privolux Collection</span>
               <span aria-hidden className="h-px w-10 bg-eucalyptus/60" />
             </p>
             <h1 className="display mt-8 text-[clamp(3rem,9.2vw,9.5rem)] leading-[.96] tracking-[-0.02em] text-ink">

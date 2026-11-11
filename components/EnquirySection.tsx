@@ -2,7 +2,7 @@ import Enquiry from "@/components/Enquiry";
 import { site } from "@/lib/site";
 
 /**
- * CLARIVO — #enquiry section (server component, no client state).
+ * PRIVOLUX — #enquiry section (server component, no client state).
  * Heading uses the existing `data-split`; supporting blocks and the form panel use `data-reveal`.
  *
  * The <Enquiry /> component itself is NOT modified: its fields, validation, submission path and

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * CLARIVO — #how section
+ * PRIVOLUX — #how section
  * Drop-in replacement for the existing <section id="how">.
  *
  * - Desktop (≥1024px, ≥640px tall, motion allowed): ONE pinned, scrubbed GSAP timeline drives
@@ -66,9 +66,8 @@ const NOISE =
 export default function HowSection() {
     const root = useRef<HTMLElement>(null);
     const frameRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
     const chipRef = useRef<HTMLSpanElement>(null);
-    const lastLabel = useRef("Comparing");
+    const lastLabel = useRef("Visible");
     /** Manual-input override: `on` while the visitor owns the state; `k` eases control back to scroll. */
     const manual = useRef({ on: false, v: 50, at: 0, k: 1 });
 
@@ -77,18 +76,12 @@ export default function HowSection() {
         const f = frameRef.current;
         if (!f) return;
         f.style.setProperty("--p", String(v));
-        const i = inputRef.current;
         const rounded = Math.round(v);
-        if (i) i.value = String(rounded);
-        const label = v <= 3 ? "Clear" : v >= 97 ? "Private" : "Comparing";
+        const label = v <= 3 ? "Visible" : v >= 97 ? "Private" : "Comparing";
         if (label !== lastLabel.current) {
             lastLabel.current = label;
             if (chipRef.current) chipRef.current.textContent = label;
         }
-        i?.setAttribute(
-            "aria-valuetext",
-            label === "Comparing" ? `Comparing, ${rounded}% private` : label,
-        );
     }, []);
 
     const onManualInput = useCallback(
@@ -564,16 +557,13 @@ export default function HowSection() {
                                         ))}
                                     </svg>
 
-                                    {/* Interactive comparison: native range input = mouse, touch and keyboard.
-                                        Its range is exactly the glazing span, so the thumb, divider and frost edge coincide. */}
                                     <input
-                                        ref={inputRef}
                                         type="range"
                                         min={0}
                                         max={100}
                                         step={1}
                                         defaultValue={50}
-                                        aria-label="Compare the private and clear glass states"
+                                        aria-label="Adjust glass privacy"
                                         aria-valuetext="Comparing, 50% private"
                                         onInput={(e) => onManualInput(Number(e.currentTarget.value))}
                                         className="glass-range peer absolute z-10 m-0 cursor-ew-resize touch-pan-y opacity-0"
@@ -635,9 +625,22 @@ export default function HowSection() {
                         </div>
                     </div>
 
-                    <p className="mt-3 shrink-0 text-[11px] uppercase tracking-[.22em] text-ink/70">
-                        Illustrative demonstration · drag or use arrow keys to compare
-                    </p>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                        <button
+                            type="button"
+                            onClick={() => onManualInput(0)}
+                            className="rounded-full border border-ink/20 bg-ivory px-4 py-2 text-[10px] uppercase tracking-[.24em] text-ink transition hover:border-eucalyptus hover:text-eucalyptus"
+                        >
+                            Visible
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => onManualInput(100)}
+                            className="rounded-full border border-eucalyptus/60 bg-eucalyptus px-4 py-2 text-[10px] uppercase tracking-[.24em] text-warm transition hover:bg-eucalyptus/90"
+                        >
+                            Private
+                        </button>
+                    </div>
                 </div>
 
                 {/* ---------- Steps ---------- */}

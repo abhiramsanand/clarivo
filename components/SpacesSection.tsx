@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * CLARIVO — #spaces section
+ * PRIVOLUX — #spaces section
  * Drop-in replacement for the existing <section id="spaces">.
  *
  * Motion is fully scoped here (gsap.context + gsap.matchMedia). The section deliberately does NOT

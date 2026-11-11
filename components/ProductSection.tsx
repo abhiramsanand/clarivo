@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * CLARIVO — #product section
+ * PRIVOLUX — #product section
  * Drop-in replacement for the existing <section id="product">.
  *
  * ASSUMPTIONS (adjust to your project):
@@ -182,7 +182,7 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
             <div data-rule aria-hidden className="mt-10 h-px w-full max-w-md bg-line" />
 
             <p data-fade className="mt-8 max-w-md leading-relaxed text-ink/70">
-              Clarivo film is applied to existing glass, so windows and doors that already suit your space can gain a
+              Privolux film is applied to existing glass, so windows and doors that already suit your space can gain a
               private state without being replaced. Suitability depends on the glass, which is why we start with an
               assessment.
             </p>
