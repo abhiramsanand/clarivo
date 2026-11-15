@@ -6,8 +6,8 @@
  *
  * Assumptions (adjust at the top of the file if needed):
  *  - `Media` is the default export of "@/components/Media" (props: src, alt, className, eager).
- *  - `site.img` has: hero, showcase, residential, office, boardroom, hospitality. `commercial` is optional;
- *    if the key does not exist, the Commercial entry (and its filter) is simply left out. No image is repeated.
+ *  - `site.img` has: hero, residential, office and boardroom. These map to residential, workplace and
+ *    architectural glazing respectively. No image is repeated.
  *  - The site header/footer are NOT provided by a layout for this route. Set SHOW_BAR to false if they are.
  *  - Client component, so this file cannot export route `metadata`.
  */
@@ -26,7 +26,7 @@ const SHOW_BAR = true;
 type ImgSrc = typeof site.img.hero;
 const imgs = site.img as unknown as Record<string, ImgSrc | undefined>;
 
-type Cat = "Residential" | "Offices" | "Boardrooms" | "Hospitality" | "Commercial";
+type Cat = "Residential" | "Workplaces" | "Architectural";
 type Item = {
   key: string;
   cat: Cat;
@@ -46,81 +46,41 @@ const RAW: (Omit<Item, "src"> & { src?: ImgSrc })[] = [
   {
     key: "residential",
     cat: "Residential",
-    title: "Living with the view",
-    caption: "Existing glazing, assessed for suitability before any film is considered.",
+    title: "Private by design",
+    caption: "Beautiful solutions for street-facing living rooms, entrance doors, bathroom windows and selected home partitions.",
     src: imgs.residential,
     alt: "Residential interior with large glazing",
     orient: "l",
     dir: "l",
     amp: 3,
-    wrap: "md:col-span-12 lg:col-span-8",
-    aspect: "aspect-[4/5] md:aspect-[16/10]",
-  },
-  {
-    key: "showcase",
-    cat: "Residential",
-    title: "Glass at the threshold",
-    caption: "Doors and windows that already suit the space, kept in place.",
-    src: imgs.showcase,
-    alt: "Modern home with large glazed doors and windows",
-    orient: "p",
-    dir: "b",
-    amp: 6,
-    wrap: "ml-auto w-[80%] md:ml-0 md:w-auto md:col-span-6 lg:col-span-4 lg:col-start-9 lg:mt-56",
-    aspect: "aspect-[4/5]",
+    wrap: "md:col-span-4",
+    aspect: "aspect-[4/3]",
   },
   {
     key: "office",
-    cat: "Offices",
-    title: "Rooms within the room",
-    caption: "Meeting rooms and partitions, with privacy when the work calls for it.",
+    cat: "Workplaces",
+    title: "Discreetly professional",
+    caption: "Transform glass-walled meeting rooms and offices into flexible environments for focused work and conversation.",
     src: imgs.office,
     alt: "Contemporary workplace with glazed meeting rooms and partitions",
     orient: "p",
     dir: "t",
     amp: 5,
-    wrap: "w-[88%] md:w-auto md:col-span-6 md:mt-20 lg:col-span-4 lg:col-start-2 lg:mt-0",
-    aspect: "aspect-[3/4] lg:aspect-[4/5]",
+    wrap: "md:col-span-4",
+    aspect: "aspect-[4/3]",
   },
   {
-    key: "boardroom",
-    cat: "Boardrooms",
-    title: "Discretion, on demand",
-    caption: "A clear room for the day, a private one for the conversation that matters.",
+    key: "architectural",
+    cat: "Architectural",
+    title: "Designed to belong",
+    caption: "Give selected internal glass screens and partitions a clean, contemporary finish with privacy on demand.",
     src: imgs.boardroom,
-    alt: "Boardroom with glass partitions and a refined meeting-room interior",
+    alt: "Architectural interior with glass screens and partitions",
     orient: "p",
     dir: "r",
     amp: 6,
-    wrap: "ml-auto w-[80%] md:ml-0 md:w-auto md:col-span-6 md:mt-40 lg:col-span-4 lg:col-start-8 lg:mt-44",
-    aspect: "aspect-[4/5] lg:aspect-[2/3]",
-  },
-  {
-    key: "hospitality",
-    cat: "Hospitality",
-    title: "Private by degrees",
-    caption: "Dining and treatment spaces that can open to the view or close around the guest.",
-    src: imgs.hospitality,
-    alt: "Refined hospitality interior with glazed screens",
-    orient: "l",
-    dir: "c",
-    amp: 5,
-    wrap: "-mx-6 md:-mx-12 md:col-span-12",
-    aspect: "aspect-[4/3] md:aspect-[21/9]",
-    bleed: true,
-  },
-  {
-    key: "commercial",
-    cat: "Commercial",
-    title: "Front of house",
-    caption: "Reception areas, clinics and shopfronts, assessed project by project.",
-    src: imgs.commercial,
-    alt: "Commercial space with glazing",
-    orient: "l",
-    dir: "l",
-    amp: 3,
-    wrap: "md:col-span-12 lg:col-span-8 lg:col-start-5",
-    aspect: "aspect-[4/5] md:aspect-[16/9]",
+    wrap: "md:col-span-4",
+    aspect: "aspect-[4/3]",
   },
 ];
 
@@ -454,7 +414,7 @@ export default function GalleryPage() {
 
           <div className="mt-8 flex items-end justify-between gap-8 lg:mt-12">
             <p data-h-fade className="max-w-sm leading-relaxed text-ink/70">
-              An exhibition of the residential and commercial environments where switchable smart film can be
+              An exhibition of residential, workplace and architectural environments where switchable smart film can be
               considered for suitable existing glass. Imagery is illustrative of these kinds of space.
             </p>
             <div data-h-cue data-h-fade className="hidden shrink-0 items-center gap-4 text-[11px] uppercase tracking-[.28em] text-ink/70 lg:flex">

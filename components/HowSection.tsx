@@ -26,7 +26,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScanLine, Layers, Sparkles } from "lucide-react";
 import Media from "@/components/Media";
 import { site } from "@/lib/site";
-import { GLAZING_BOX, PANES, polygon, svgPoints } from "@/lib/glazing";
+import { GLAZING_BOX, PANES, polygon } from "@/lib/glazing";
 
 const STEPS = [
     {
@@ -268,19 +268,13 @@ export default function HowSection() {
                                 0,
                             );
 
-                        // Step 1 — Assess: the glazing is outlined and scanned (photo stays clear)
+                        // Step 1 — Assess: scan the glazing while the photo stays clear
                         tl.fromTo(
-                            q("[data-pane-border]"),
-                            { opacity: 0.3 },
-                            { opacity: 1, duration: 0.6, ease: "power2.out" },
-                            0,
+                            q("[data-scan]"),
+                            { opacity: 0 },
+                            { opacity: 1, duration: 0.1 },
+                            0.02,
                         )
-                            .fromTo(
-                                q("[data-scan]"),
-                                { opacity: 0 },
-                                { opacity: 1, duration: 0.1 },
-                                0.02,
-                            )
                             .to(
                                 q("[data-scan]"),
                                 { yPercent: 100, duration: 0.8, ease: "power1.inOut" },
@@ -536,26 +530,6 @@ export default function HowSection() {
                                             </div>
                                         ))}
                                     </div>
-
-                                    {/* Glazing outline (inner glass boundaries, not the outer frame) */}
-                                    <svg
-                                        data-pane-border
-                                        aria-hidden
-                                        viewBox="0 0 100 100"
-                                        preserveAspectRatio="none"
-                                        className="pointer-events-none absolute inset-0 h-full w-full"
-                                    >
-                                        {PANES.map((p) => (
-                                            <polygon
-                                                key={p.id}
-                                                points={svgPoints(p.points)}
-                                                fill="none"
-                                                stroke="rgba(252,251,248,.5)"
-                                                strokeWidth={1}
-                                                vectorEffect="non-scaling-stroke"
-                                            />
-                                        ))}
-                                    </svg>
 
                                     <input
                                         type="range"

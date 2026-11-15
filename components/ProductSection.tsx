@@ -164,33 +164,53 @@ export default function ProductSection({ ctaHref = "#how" }: Props) {
             <div data-eyebrow className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
               <span>01</span>
               <span aria-hidden className="h-px w-10 bg-eucalyptus/60" />
-              <span>The Smart Film Difference</span>
+              <span>The Privolux Difference</span>
             </div>
 
             <h2 className="display mt-8 text-[clamp(2.4rem,5.2vw,5rem)] leading-[1.02] tracking-[-0.01em] text-ink">
               <span className="block overflow-hidden pb-[.2em]">
-                <span data-line className="block">The window stays.</span>
+                <span data-line className="block">Keep the light.</span>
               </span>
               <span className="block overflow-hidden pb-[.1em]">
-                <span data-line className="block">The view becomes</span>
+                <span data-line className="block">Choose the</span>
               </span>
               <span className="block overflow-hidden pb-[.2em]">
-                <span data-line className="block italic text-ink/90">yours to control.</span>
+                <span data-line className="block italic text-ink/90">privacy.</span>
               </span>
             </h2>
 
-            <div data-rule aria-hidden className="mt-10 h-px w-full max-w-md bg-line" />
-
             <p data-fade className="mt-8 max-w-md leading-relaxed text-ink/70">
-              Privolux film is applied to existing glass, so windows and doors that already suit your space can gain a
-              private state without being replaced. Suitability depends on the glass, which is why we start with an
-              assessment.
+              Luxury isn't about shutting the world out. It's having the freedom to open your space to natural light, then create a more private setting
+              whenever the moment calls for it.
             </p>
+            <p data-fade className="mt-4 max-w-md leading-relaxed text-ink/70">
+              Privolux switchable smart film transforms suitable existing glass from clear to softly frosted without permanently closing off the view.
+            </p>
+
+            <div data-rule aria-hidden className="mt-8 h-px w-full max-w-md origin-left bg-line" />
+            <ol aria-label="The Privolux difference" className="max-w-md">
+              {[
+                "For modern homes and elegant interiors",
+                "A minimalist alternative to permanent frosted glass",
+                "Individual glass assessment before installation",
+              ].map((item, index) => (
+                <li
+                  key={item}
+                  data-fade
+                  className="grid grid-cols-[1.5rem_1fr] items-center gap-3 border-b border-line py-4 text-xs leading-relaxed text-ink/85"
+                >
+                  <span className="text-[10px] tabular-nums text-eucalyptus/70">
+                    0{index + 1}
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
 
             <a
               data-fade
               href={ctaHref}
-              className="group mt-10 inline-flex items-center gap-4 border-b border-eucalyptus/40 pb-2 text-sm uppercase tracking-[.2em] text-ink transition-colors duration-500 hover:border-eucalyptus"
+              className="group mt-8 inline-flex items-center gap-4 border-b border-eucalyptus/40 pb-2 text-sm uppercase tracking-[.2em] text-ink transition-colors duration-500 hover:border-eucalyptus"
             >
               Discover the film
               <svg

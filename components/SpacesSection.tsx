@@ -7,9 +7,7 @@
  * Motion is fully scoped here (gsap.context + gsap.matchMedia). The section deliberately does NOT
  * use data-speed / data-clip / data-split, so the global <Motion> utility cannot double-animate it.
  *
- * Image keys: residential, office, boardroom, hospitality come from site.img as before.
- * Commercial reads `site.img.commercial` if you add it (recommended: reception / clinic / retail glazing);
- * until then it falls back to site.img.hero so the section never breaks.
+ * The three image keys map to residential, workplace and architectural glazing.
  */
 
 import { useEffect, useLayoutEffect, useRef } from "react";
@@ -26,6 +24,7 @@ const imgs = site.img as unknown as Record<string, ImgSrc | undefined>;
 
 type Item = {
     n: string;
+    category: string;
     title: string;
     desc: string;
     src: ImgSrc;
@@ -39,58 +38,39 @@ type Item = {
 const ITEMS: Item[] = [
     {
         n: "01",
-        title: "Residential",
-        desc: "Bedrooms, bathrooms and street-facing glass.",
+        category: "Residential",
+        title: "Private by design",
+        desc: "Beautiful solutions for street-facing living rooms, entrance doors, bathroom windows and selected home partitions.",
         src: imgs.residential ?? site.img.hero,
         alt: "Contemporary home with expansive glazed doors and windows",
         dir: "l",
         amp: 3,
-        wrap: "md:col-span-12 lg:col-span-8",
-        aspect: "aspect-[4/3] md:aspect-[16/10]",
+        wrap: "md:col-span-4",
+        aspect: "aspect-[4/3]",
     },
     {
         n: "02",
-        title: "Offices",
-        desc: "Meeting rooms and open-plan partitions.",
+        category: "Workplaces",
+        title: "Discreetly professional",
+        desc: "Transform glass-walled meeting rooms and offices into flexible environments for focused work and conversation.",
         src: imgs.office ?? site.img.hero,
         alt: "Contemporary workplace with glazed meeting rooms and partitions",
         dir: "b",
         amp: 6,
-        wrap: "md:col-span-6 lg:col-span-4 lg:col-start-9 lg:mt-44",
-        aspect: "aspect-[4/5] md:aspect-[3/4]",
+        wrap: "md:col-span-4",
+        aspect: "aspect-[4/3]",
     },
     {
         n: "03",
-        title: "Boardrooms",
-        desc: "Discretion for confidential conversations.",
+        category: "Architectural",
+        title: "Designed to belong",
+        desc: "Give selected internal glass screens and partitions a clean, contemporary finish with privacy on demand.",
         src: imgs.boardroom ?? site.img.hero,
-        alt: "Boardroom with glass partitions and a refined meeting-room interior",
+        alt: "Architectural interior with glass screens and partitions",
         dir: "t",
         amp: 5,
-        wrap: "md:col-span-6 md:mt-20 lg:col-span-5 lg:col-start-2 lg:mt-0",
-        aspect: "aspect-[4/5]",
-    },
-    {
-        n: "04",
-        title: "Hospitality",
-        desc: "Private dining and treatment spaces.",
-        src: imgs.hospitality ?? site.img.hero,
-        alt: "Refined hospitality interior with glazed screens",
-        dir: "r",
-        amp: 3,
-        wrap: "md:col-span-12 lg:col-span-6 lg:col-start-7 lg:mt-32",
-        aspect: "aspect-[4/3] md:aspect-[16/10] lg:aspect-[3/2]",
-    },
-    {
-        n: "05",
-        title: "Commercial",
-        desc: "Shopfronts, clinics and reception areas, assessed project by project.",
-        src: imgs.commercial ?? site.img.hero,
-        alt: "Commercial reception area with glazing",
-        dir: "c",
-        amp: 2.5,
-        wrap: "md:col-span-12 lg:col-span-9 lg:col-start-4",
-        aspect: "aspect-[4/3] md:aspect-[2/1] lg:aspect-[16/8]",
+        wrap: "md:col-span-4",
+        aspect: "aspect-[4/3]",
     },
 ];
 
@@ -139,10 +119,9 @@ export default function SpacesSection() {
                             .from(q("[data-rule]"), { scaleX: 0, transformOrigin: "left center", duration: 1.4, ease: "expo.inOut" }, 0.5)
                             .from(q("[data-intro-p]"), { opacity: 0, y: 24, duration: 1 }, 0.9);
 
-                        // Headline eases out of focus as the gallery takes over
+                        // Headline drifts gently as the gallery takes over
                         gsap.to(q("[data-intro-drift]"), {
                             yPercent: -10 * k,
-                            opacity: 0.35,
                             ease: "none",
                             scrollTrigger: { trigger: intro, start: "top 20%", end: "bottom top", scrub: true },
                         });
@@ -230,26 +209,23 @@ export default function SpacesSection() {
                             data-eyebrow
                             className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus"
                         >
-                            <span>Designed for different spaces</span>
+                            <span>SPACES WE TRANSFORM</span>
                         </p>
                         <div data-intro-drift className="will-change-transform">
                             <h2 className="display mt-8 text-[clamp(3rem,9vw,8.5rem)] leading-[.98] tracking-[-0.015em] text-ink">
                                 <span className="block overflow-hidden pb-[.08em]">
-                                    <span data-line className="block">One film.</span>
+                                    <span data-line className="block">Luxury lives in</span>
                                 </span>
                                 <span className="block overflow-hidden pb-[.08em]">
-                                    <span data-line className="block">Five kinds</span>
-                                </span>
-                                <span className="block overflow-hidden pb-[.08em]">
-                                    <span data-line className="block italic text-ink">of space.</span>
+                                    <span data-line className="block">the details.</span>
                                 </span>
                             </h2>
                         </div>
                     </div>
                     <div className="lg:col-span-4 lg:col-start-9 lg:self-end">
                         <p data-intro-p className="max-w-sm leading-relaxed text-ink/70">
-                            Switchable smart film can be considered for suitable existing glass across homes, workplaces and
-                            public-facing spaces. Each project begins with an assessment of the glazing already in place.
+                            From a quiet family retreat to a sophisticated meeting room, Privolux helps create
+                            adaptable spaces that feel beautifully yours.
                         </p>
                     </div>
                     <div data-rule aria-hidden className="h-px w-full bg-line lg:col-span-12" />
@@ -282,7 +258,7 @@ export default function SpacesSection() {
                                         aria-hidden
                                         className="h-px w-8 bg-eucalyptus/60 transition-[width] duration-500 ease-out [@media(hover:hover)]:group-hover:w-14"
                                     />
-                                    <span className="text-ink/70">/ 05</span>
+                                    <span className="text-ink/70">{it.category}</span>
                                 </div>
                                 <h3 data-cap className="display mt-4 text-3xl text-ink md:text-4xl">{it.title}</h3>
                                 <p data-cap className="mt-2 max-w-xs text-ink/70">{it.desc}</p>

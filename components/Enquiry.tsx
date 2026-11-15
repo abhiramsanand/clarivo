@@ -50,7 +50,19 @@ export default function Enquiry() {
       <label className="block md:col-span-2"><span className="text-sm text-ink/70">Tell us about the glass: windows or doors, rough sizes, glass type if known</span>
         <textarea rows={4} className={field} value={f.message} onChange={(e) => set("message", e.target.value)} {...a("message")} /><Err k="message" /></label>
       <input tabIndex={-1} autoComplete="off" aria-hidden className="hidden" value={f.website} onChange={(e) => set("website", e.target.value)} />
-      <div className="md:col-span-2"><label className="flex items-start gap-3 text-sm text-ink/70"><input type="checkbox" className="mt-1 accent-eucalyptus" checked={f.consent} onChange={(e) => set("consent", e.target.checked)} {...a("consent")} />I agree to be contacted about this enquiry.</label><Err k="consent" /></div>
+      <div className="md:col-span-2">
+        <label className="flex cursor-pointer items-start gap-3 text-sm text-ink/70">
+          <input
+            type="checkbox"
+            className="mt-5 h-4 w-4 shrink-0 accent-eucalyptus"
+            checked={f.consent}
+            onChange={(e) => set("consent", e.target.checked)}
+            {...a("consent")}
+          />
+          <span className="leading-6 ml-2">I agree to be contacted about this enquiry.</span>
+        </label>
+        <Err k="consent" />
+      </div>
       <div className="flex flex-wrap items-center gap-6 md:col-span-2">
         <button data-magnetic disabled={state === "sending"} className="inline-flex items-center gap-2 rounded-full bg-eucalyptus px-8 py-4 font-medium text-warm transition hover:bg-ink disabled:opacity-60">
           {state === "sending" && <Loader2 className="h-4 w-4 animate-spin" />}{state === "sending" ? "Sending" : "Send enquiry"}</button>

@@ -14,14 +14,14 @@ import { site } from "@/lib/site";
 import ProductSection from "@/components/ProductSection";
 import HowSection from "@/components/HowSection";
 import SpacesSection from "@/components/SpacesSection";
-import WhySection from "@/components/WhySection";
+import ApproachSection from "@/components/ApproachSection";
 import EnquirySection from "@/components/EnquirySection";
 
 const nav = [
   ["Product", "#product"],
   ["How it works", "#how"],
   ["Spaces", "#spaces"],
-  ["Why Privolux", "#why"],
+  ["How to Approach", "#approach"],
   ["Gallery", "/gallery"],
 ];
 
@@ -135,7 +135,7 @@ export default function Page() {
               data-split
               className="display max-w-[12ch] text-[clamp(3.35rem,9.5vw,9.5rem)]"
             >
-              Privacy. When You Need It.
+             Privacy is the new luxury.
             </h1>
 
             <div className="mt-10 grid items-end gap-8 md:grid-cols-[1fr_auto]">
@@ -143,8 +143,7 @@ export default function Page() {
                 data-hero-in
                 className="max-w-md text-lg leading-relaxed text-warm/85"
               >
-                Smart film that turns the glass you already have from clear
-                to private, for Queensland homes and workplaces.
+                Beautifully open when you want the view. Effortlessly private when you need you space. Discover switchable smart film for refined queensland livig.
               </p>
 
               <div data-hero-in className="flex flex-wrap gap-3">
@@ -216,7 +215,7 @@ export default function Page() {
         <SpacesSection />
 
         {/* WHY PRIVOLUX */}
-        <WhySection />
+        <ApproachSection />
 
         {/* ENQUIRY */}
         <EnquirySection />
@@ -233,7 +232,7 @@ export default function Page() {
             </p>
 
             <p className="mt-2 text-sm text-warm/60">
-              {site.product} for {site.region}
+              {site.product} - {site.region}
             </p>
 
             {c.abn && (

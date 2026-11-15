@@ -7,26 +7,26 @@ import WhyRules from "@/components/WhyRules";
  */
 
 const reasons: [string, string][] = [
-    ["Start with what is there", "Film is applied to existing glazing where it is suitable, so you are not defaulting to replacement."],
-    ["Assessed before quoted", "Every project begins by checking the glass, so recommendations fit your windows."],
-    ["Specifications on request", "Performance details are confirmed against the product datasheet for your project."],
+    ["Tell us about your space", "Share photos, glass measurements and how you'd like your privacy to work."],
+    ["We assess suitability", "The glass type, condition and installation requirements are reviewed before providing a proposal."],
+    ["Enjoy a new experience", "Suitable installations give your existing glazing a clear state and a frosted privacy state."],
 ];
 
-export default function WhySection() {
+export default function ApproachSection() {
     return (
-        <section id="why" className="relative bg-eucalyptus px-6 py-28 text-ivory md:px-12 md:py-40 lg:py-48">
+        <section id="approach" className="relative bg-eucalyptus px-6 py-28 text-ivory md:px-12 md:py-40 lg:py-48">
             <div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-12 lg:gap-x-10">
                 {/* Heading column */}
                 <div className="lg:col-span-6 lg:self-start">
                     <p className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-mist">
-                        <span>Why Privolux</span>
+                        <span>A CONSIDERED APPROACH</span>
                         <span aria-hidden className="h-px w-10 bg-mist/50" />
                     </p>
                     <h2
                         data-split
                         className="display mt-8 text-[clamp(2.6rem,6vw,5.5rem)] !leading-[1.2] tracking-[-0.01em] lg:max-w-[12ch]"
                     >
-                        Upgrade the glass you already have.
+                        From the first conversation to finished space.
                     </h2>
                 </div>
 

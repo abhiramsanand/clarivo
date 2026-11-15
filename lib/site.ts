@@ -1,8 +1,8 @@
 // Edit this file to update brand, contact details, imagery and confirmed claims.
 export const site = {
-  brand: "PRIVOLUX™",
-  product: "Smart Film",
-  region: "Queensland, Australia",
+  brand: "PRIVOLUX",
+  product: "Smart Films",
+  region: "Queensland and Brisbane",
   contact: { email: "", phone: "", address: "", abn: "" },
   // Unsplash photos: confirm each URL resolves and the licence suits you, or use local files in /public.
   img: {

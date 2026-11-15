@@ -20,7 +20,7 @@ export default function EnquirySection() {
                 {/* ---------- Invitation ---------- */}
                 <div className="lg:col-span-5">
                     <p className="flex items-center gap-4 text-[11px] uppercase tracking-[.28em] text-eucalyptus">
-                        <span>Start a conversation</span>
+                        <span>YOUR SPACE. YOUR PRIVACY.</span>
                         <span aria-hidden className="h-px w-10 bg-eucalyptus/60" />
                     </p>
 
@@ -28,12 +28,20 @@ export default function EnquirySection() {
                         data-split
                         className="display mt-8 text-[clamp(2.6rem,5.5vw,5rem)] leading-[1.15] tracking-[-0.01em] text-ink"
                     >
-                        Tell us about your glass.
+                        Let's create something beautifully private.
                     </h2>
 
                     <p data-reveal className="mt-8 max-w-md leading-relaxed text-ink/70">
-                        Share a few details and we will come back to you about suitability and next steps for your {site.region}{" "}
-                        project.
+                      Tell us about your windows, door or glass partitions. We welcome reidential and commercial enquiries across Brisbane and South East Queensland.
+                    </p>
+
+                     <p data-reveal className="mt-8 max-w-md leading-relaxed text-ink/70">
+                     Thoughtful advice starts with understanding the glass you already have.
+                    </p>
+
+                    <p data-reveal className="mt-8 max-w-md leading-relaxed text-ink/70">
+                     Smart film is not a blackout solution: Outlines may remain visible ate close distances or under stong lighting.
+                     Product performance and compatibility are assessed project by project.
                     </p>
 
                     {hasContact && (
