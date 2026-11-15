@@ -104,21 +104,33 @@ export default function Page() {
         >
           <div data-hero-img className="absolute inset-0">
             <Media
-              src={site.img.hero}
-              alt="Luxury interior with floor-to-ceiling windows"
+              src={site.img.howRoom}
+              alt="Modern living room with floor-to-ceiling sliding windows, shown with the glass clear and private"
               eager
               className="h-full w-full"
+            />
+            <div
+              data-hero-frost
+              style={{
+                opacity: 0,
+                backgroundImage: `url(${site.img.howGlassFrost})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                WebkitMaskImage: `url(${site.img.howGlassMask})`,
+                maskImage: `url(${site.img.howGlassMask})`,
+                WebkitMaskSize: "cover",
+                maskSize: "cover",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+              }}
+              className="pointer-events-none absolute inset-0"
+              aria-hidden
             />
           </div>
 
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/50" />
-
-          <div
-            data-hero-frost
-            style={{ opacity: 0 }}
-            className="frost absolute inset-0"
-            aria-hidden
-          />
 
           <div
             data-hero-veil
@@ -143,7 +155,7 @@ export default function Page() {
                 data-hero-in
                 className="max-w-md text-lg leading-relaxed text-warm/85"
               >
-                Beautifully open when you want the view. Effortlessly private when you need you space. Discover switchable smart film for refined queensland livig.
+                Beautifully open when you want the view. Effortlessly private when you need you space. Discover switchable smart film for refined queensland living.
               </p>
 
               <div data-hero-in className="flex flex-wrap gap-3">
