@@ -16,6 +16,7 @@ import HowSection from "@/components/HowSection";
 import SpacesSection from "@/components/SpacesSection";
 import ApproachSection from "@/components/ApproachSection";
 import EnquirySection from "@/components/EnquirySection";
+import FrostLayer from "@/components/FrostLayer";
 
 const nav = [
   ["Product", "#product"],
@@ -102,33 +103,32 @@ export default function Page() {
           data-hero
           className="relative min-h-[680px] h-[100svh] overflow-hidden grain md:min-h-[720px]"
         >
-          <div data-hero-img className="absolute inset-0">
+
+          <div
+            data-hero-img
+            className="absolute left-1/2 top-1/2"
+            style={{
+              width: "max(100%, calc(100svh * 1.775862))",
+              aspectRatio: "1648 / 928",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            {/* Base clear image */}
             <Media
               src={site.img.howRoom}
-              alt="Modern living room with floor-to-ceiling sliding windows, shown with the glass clear and private"
+              alt="Modern living room with a large clear garden-facing window"
               eager
               className="h-full w-full"
             />
-            <div
-              data-hero-frost
-              style={{
-                opacity: 0,
-                backgroundImage: `url(${site.img.howGlassFrost})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                WebkitMaskImage: `url(${site.img.howGlassMask})`,
-                maskImage: `url(${site.img.howGlassMask})`,
-                WebkitMaskSize: "cover",
-                maskSize: "cover",
-                WebkitMaskPosition: "center",
-                maskPosition: "center",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-              }}
-              className="pointer-events-none absolute inset-0"
-              aria-hidden
+
+            {/* Frost effect restricted to window glass */}
+            <FrostLayer
+              roomSrc={site.img.howRoom}
+              frostSrc={site.img.howGlassFrost}
+              maskSrc={site.img.howGlassMask}
             />
           </div>
+
 
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-ink/50" />
 
@@ -147,7 +147,7 @@ export default function Page() {
               data-split
               className="display max-w-[12ch] text-[clamp(3.35rem,9.5vw,9.5rem)]"
             >
-             Privacy is the new luxury.
+              Privacy is the new luxury.
             </h1>
 
             <div className="mt-10 grid items-end gap-8 md:grid-cols-[1fr_auto]">
