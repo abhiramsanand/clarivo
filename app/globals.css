@@ -36,10 +36,10 @@ body { font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-seri
 @media (prefers-reduced-motion:reduce){#enquiry .enq-form *{transition:none!important}}
 
 /* #how glass demonstration: stage keeps the photo's aspect ratio so pane geometry never drifts */
-.how-stage { position: relative; width: 100%; aspect-ratio: 718 / 708; overflow: hidden; background: #B8C4C5; }
+.how-stage { position: relative; width: 100%; aspect-ratio: 1268 / 1241; overflow: hidden; background: #B8C4C5; }
 @media (min-width: 1024px) {
   .how-slot { container-type: size; display: flex; align-items: center; justify-content: center; min-height: 26rem; flex: 1 1 0%; }
-  .how-stage { width: min(100cqw, calc(100cqh * 718 / 708)); }
+  .how-stage { width: min(100cqw, calc(100cqh * 1268 / 1241)); }
 }
 .glass-range { -webkit-appearance: none; appearance: none; background: transparent; }
 .glass-range::-webkit-slider-runnable-track { background: transparent; height: 100%; }
