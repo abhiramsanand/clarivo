@@ -29,9 +29,9 @@ SS = 4                                       # supersampling for anti-aliased ma
 # Inner glass boundaries (just inside the black frame / mullions). Quads: TL, TR, BR, BL.
 # Lower edges of the centre/right panes run behind the sofa, the sofa occluder removes that part.
 PANES = {
-    "left":   [(66, 17),   (443, 61),  (443, 875), (66, 901)],
-    "centre": [(472, 60),  (940, 106), (940, 862), (472, 873)],
-    "right":  [(967, 113), (1232, 137), (1232, 740), (967, 740)],
+    "left":   [(66, 14),   (443, 50),  (443, 885), (66, 910)],
+    "centre": [(469, 53),  (940, 100), (940, 862), (472, 880)],
+    "right":  [(964, 103), (1230, 130), (1232, 740), (967, 740)],
 }
 # Interior objects that sit IN FRONT of the glass and must never be frosted.
 OCCLUDERS = {
@@ -42,11 +42,8 @@ OCCLUDERS = {
         (551.5, 880), (555, 866), (562, 858), (580, 853),      # chaise left edge + rounded top-left corner
         (650, 845), (717.1, 838),                              # sloped chaise top edge up to the arm
         # --- armrest: edge positions measured pixel-by-pixel from the photo ---
-        (717.1, 770), (717.6, 766), (718.6, 763.3), (719.6, 762.3), (720.6, 761.3),   # arm left edge + rounded corner
-        (724, 760.3), (731, 760.3),                            # arm top edge. It is NOT level: it climbs from
-        (734, 759.3), (752, 759.3),                            # y~761 at the left corner to y~757 at the right,
-        (755, 758.3), (779, 758.3),                            # so each step below follows the photo
-        (782, 757.3), (804.5, 757.3),
+        (717.1, 768), (717.6, 764), (718.6, 763.3), (719.6, 762.3), (720.6, 761.3),   # arm left edge + rounded corner
+        (724, 762),(804.5, 760),
         # --- back cushion ---
         (804.5, 686), (805, 684.8), (807, 684.3), (812, 684.3),  # left edge + rounded top-left corner
         (1270, 684.3),                                         # top edge, past the photo's right edge

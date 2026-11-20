@@ -5,13 +5,13 @@ export const GLAZING_IMAGE = { width: 1265, height: 1243 } as const;
 
 export type PanePoint = readonly [x: number, y: number];
 export const PANES: ReadonlyArray<{ id: string; points: ReadonlyArray<PanePoint> }> = [
-    { id: "left", points: [[5.217, 1.368], [35.02, 4.907], [35.02, 70.394], [5.217, 72.486]] },
-    { id: "centre", points: [[37.312, 4.827], [74.308, 8.528], [74.308, 69.348], [37.312, 70.233]] },
-    { id: "right", points: [[76.443, 9.091], [97.391, 11.022], [97.391, 59.533], [76.443, 59.533]] },
+    { id: "left", points: [[5.217, 1.126], [35.02, 4.023], [35.02, 71.199], [5.217, 73.21]] },
+    { id: "centre", points: [[37.075, 4.264], [74.308, 8.045], [74.308, 69.348], [37.312, 70.796]] },
+    { id: "right", points: [[76.206, 8.286], [97.233, 10.459], [97.391, 59.533], [76.443, 59.533]] },
 ];
 
 /** Bounding box of all glazing, used for the slider range, scan line and film sweep. */
-export const GLAZING_BOX = { left: 5.217, right: 97.391, top: 1.368, bottom: 72.486, width: 92.174, height: 71.118 } as const;
+export const GLAZING_BOX = { left: 5.217, right: 97.391, top: 1.126, bottom: 73.21, width: 92.174, height: 72.084 } as const;
 
 export const polygon = (pts: ReadonlyArray<PanePoint>) => `polygon(${pts.map(([x, y]) => `${x}% ${y}%`).join(", ")})`;
 export const svgPoints = (pts: ReadonlyArray<PanePoint>) => pts.map(([x, y]) => `${x},${y}`).join(" ");
